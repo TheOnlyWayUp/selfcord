@@ -40,7 +40,7 @@ from typing import (
 )
 
 import aiohttp
-import selfcord
+from ... import utils, GatewayNotFound, ConnectionClosed
 import inspect
 import sys
 import traceback
@@ -112,12 +112,12 @@ class SleepHandle:
     def __init__(self, dt: datetime.datetime, *, loop: asyncio.AbstractEventLoop) -> None:
         self.loop: asyncio.AbstractEventLoop = loop
         self.future: asyncio.Future[None] = loop.create_future()
-        relative_delta = selfcord.utils.compute_timedelta(dt)
+        relative_delta = utils.compute_timedelta(dt)
         self.handle = loop.call_later(relative_delta, self.future.set_result, True)
 
     def recalculate(self, dt: datetime.datetime) -> None:
         self.handle.cancel()
-        relative_delta = selfcord.utils.compute_timedelta(dt)
+        relative_delta = utils.compute_timedelta(dt)
         self.handle: asyncio.TimerHandle = self.loop.call_later(relative_delta, self.future.set_result, True)
 
     def wait(self) -> asyncio.Future[Any]:
@@ -156,8 +156,8 @@ class Loop(Generic[LF]):
         self._injected = None
         self._valid_exception = (
             OSError,
-            selfcord.GatewayNotFound,
-            selfcord.ConnectionClosed,
+            GatewayNotFound,
+            ConnectionClosed,
             aiohttp.ClientError,
             asyncio.TimeoutError,
         )
@@ -230,7 +230,7 @@ class Loop(Generic[LF]):
                                 'Sleeping until %s again to correct clock'
                             ),
                             self.coro.__qualname__,
-                            selfcord.utils.utcnow(),
+                            utils.utcnow(),
                             self._next_iteration,
                             self._next_iteration,
                         )

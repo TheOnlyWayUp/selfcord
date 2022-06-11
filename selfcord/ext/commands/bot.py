@@ -49,7 +49,7 @@ from typing import (
     overload,
 )
 
-import selfcord
+from ... import utils, ClientException, Client
 from ...utils import MISSING, _is_submodule
 
 from .core import GroupMixin
@@ -204,7 +204,7 @@ class BotBase(GroupMixin[None]):
         for event in self.extra_events.get(ev, []):
             self._schedule_event(event, ev, *args, **kwargs)  # type: ignore
 
-    @selfcord.utils.copy_doc(selfcord.Client.close)
+    @utils.copy_doc(Client.close)
     async def close(self) -> None:
         for extension in tuple(self.__extensions):
             try:
@@ -380,7 +380,7 @@ class BotBase(GroupMixin[None]):
             return True
 
         # type-checker doesn't distinguish between functions and methods
-        return await selfcord.utils.async_all(f(ctx) for f in data)  # type: ignore
+        return await utils.async_all(f(ctx) for f in data)  # type: ignore
 
     async def is_owner(self, user: User, /) -> bool:
         """|coro|
@@ -645,7 +645,7 @@ class BotBase(GroupMixin[None]):
 
         if existing is not None:
             if not override:
-                raise selfcord.ClientException(f'Cog named {cog_name!r} already loaded')
+                raise ClientException(f'Cog named {cog_name!r} already loaded')
             await self.remove_cog(cog_name)
 
         cog = await cog._inject(self, override=override)
@@ -1018,7 +1018,7 @@ class BotBase(GroupMixin[None]):
 
         if callable(prefix):
             # self will be a Bot or AutoShardedBot
-            ret = await selfcord.utils.maybe_coroutine(prefix, self, message)  # type: ignore
+            ret = await utils.maybe_coroutine(prefix, self, message)  # type: ignore
 
         if not isinstance(ret, str):
             try:
@@ -1113,7 +1113,7 @@ class BotBase(GroupMixin[None]):
                 # if the context class' __init__ consumes something from the view this
                 # will be wrong.  That seems unreasonable though.
                 if message.content.startswith(tuple(prefix)):
-                    invoked_prefix = selfcord.utils.find(view.skip_string, prefix)
+                    invoked_prefix = utils.find(view.skip_string, prefix)
                 else:
                     return ctx
 
@@ -1211,7 +1211,7 @@ class BotBase(GroupMixin[None]):
         await self.process_commands(message)
 
 
-class Bot(BotBase, selfcord.Client):
+class Bot(BotBase, Client):
     """Represents a selfcord bot.
 
     This class is a subclass of :class:`selfcord.Client` and as a result

@@ -45,7 +45,7 @@ from typing import (
     overload,
 )
 
-import selfcord
+from ... import Thread, TextChannel, Thread, Permissions, utils
 
 from ._types import _BaseCommand
 from .cog import Cog
@@ -90,7 +90,7 @@ __all__ = (
     'bot_has_guild_permissions',
 )
 
-MISSING: Any = selfcord.utils.MISSING
+MISSING: Any = utils.MISSING
 
 T = TypeVar('T')
 CogT = TypeVar('CogT', bound='Optional[Cog]')
@@ -125,8 +125,8 @@ def get_signature_parameters(
     signature = Signature.from_callable(function)
     params: Dict[str, Parameter] = {}
     cache: Dict[str, Any] = {}
-    eval_annotation = selfcord.utils.evaluate_annotation
-    required_params = selfcord.utils.is_inside_class(function) + 1 if skip_parameters is None else skip_parameters
+    eval_annotation = utils.evaluate_annotation
+    required_params = utils.is_inside_class(function) + 1 if skip_parameters is None else skip_parameters
     if len(signature.parameters) < required_params:
         raise TypeError(f'Command signature requires at least {required_params - 1} parameter(s)')
 
@@ -487,7 +487,7 @@ class Command(_BaseCommand, Generic[CogT, P, T]):
     def update(self, **kwargs: Any) -> None:
         """Updates :class:`Command` instance with updated attribute.
 
-        This works similarly to the :func:`~selfcord.ext.commands.command` decorator in terms
+        This works similarly to the :func:`~ext.commands.command` decorator in terms
         of parameters in that they are passed to the :class:`Command` or
         subclass constructors, sans the name and callback.
         """
@@ -1167,7 +1167,7 @@ class Command(_BaseCommand, Generic[CogT, P, T]):
             if cog is not None:
                 local_check = Cog._get_overridden_method(cog.cog_check)
                 if local_check is not None:
-                    ret = await selfcord.utils.maybe_coroutine(local_check, ctx)
+                    ret = await utils.maybe_coroutine(local_check, ctx)
                     if not ret:
                         return False
 
@@ -1176,7 +1176,7 @@ class Command(_BaseCommand, Generic[CogT, P, T]):
                 # since we have no checks, then we just return True.
                 return True
 
-            return await selfcord.utils.async_all(predicate(ctx) for predicate in predicates)  # type: ignore
+            return await utils.async_all(predicate(ctx) for predicate in predicates)  # type: ignore
         finally:
             ctx.command = original
 
@@ -1396,7 +1396,7 @@ class GroupMixin(Generic[CogT]):
         *args: Any,
         **kwargs: Any,
     ) -> Any:
-        """A shortcut decorator that invokes :func:`~selfcord.ext.commands.command` and adds it to
+        """A shortcut decorator that invokes :func:`~ext.commands.command` and adds it to
         the internal command list via :meth:`~.GroupMixin.add_command`.
 
         Returns
@@ -1718,7 +1718,7 @@ def group(
 ) -> Any:
     """A decorator that transforms a function into a :class:`.Group`.
 
-    This is similar to the :func:`~selfcord.ext.commands.command` decorator but the ``cls``
+    This is similar to the :func:`~ext.commands.command` decorator but the ``cls``
     parameter is set to :class:`Group` by default.
 
     .. versionchanged:: 1.1
@@ -1935,9 +1935,9 @@ def has_role(item: Union[int, str], /) -> Callable[[T], T]:
 
         # ctx.guild is None doesn't narrow ctx.author to Member
         if isinstance(item, int):
-            role = selfcord.utils.get(ctx.author.roles, id=item)  # type: ignore
+            role = utils.get(ctx.author.roles, id=item)  # type: ignore
         else:
-            role = selfcord.utils.get(ctx.author.roles, name=item)  # type: ignore
+            role = utils.get(ctx.author.roles, name=item)  # type: ignore
         if role is None:
             raise MissingRole(item)
         return True
@@ -1982,7 +1982,7 @@ def has_any_role(*items: Union[int, str]) -> Callable[[T], T]:
             raise NoPrivateMessage()
 
         # ctx.guild is None doesn't narrow ctx.author to Member
-        getter = functools.partial(selfcord.utils.get, ctx.author.roles)
+        getter = functools.partial(utils.get, ctx.author.roles)
         if any(getter(id=item) is not None if isinstance(item, int) else getter(name=item) is not None for item in items):
             return True
         raise MissingAnyRole(list(items))
@@ -2014,9 +2014,9 @@ def bot_has_role(item: int, /) -> Callable[[T], T]:
 
         me = ctx.me
         if isinstance(item, int):
-            role = selfcord.utils.get(me.roles, id=item)
+            role = utils.get(me.roles, id=item)
         else:
-            role = selfcord.utils.get(me.roles, name=item)
+            role = utils.get(me.roles, name=item)
         if role is None:
             raise BotMissingRole(item)
         return True
@@ -2043,7 +2043,7 @@ def bot_has_any_role(*items: int) -> Callable[[T], T]:
             raise NoPrivateMessage()
 
         me = ctx.me
-        getter = functools.partial(selfcord.utils.get, me.roles)
+        getter = functools.partial(utils.get, me.roles)
         if any(getter(id=item) is not None if isinstance(item, int) else getter(name=item) is not None for item in items):
             return True
         raise BotMissingAnyRole(list(items))
@@ -2059,7 +2059,7 @@ def has_permissions(**perms: bool) -> Callable[[T], T]:
     guild wide permissions.
 
     The permissions passed in must be exactly like the properties shown under
-    :class:`.selfcord.Permissions`.
+    :class:`.Permissions`.
 
     This check raises a special exception, :exc:`.MissingPermissions`
     that is inherited from :exc:`.CheckFailure`.
@@ -2081,7 +2081,7 @@ def has_permissions(**perms: bool) -> Callable[[T], T]:
 
     """
 
-    invalid = set(perms) - set(selfcord.Permissions.VALID_FLAGS)
+    invalid = set(perms) - set(Permissions.VALID_FLAGS)
     if invalid:
         raise TypeError(f"Invalid permission(s): {', '.join(invalid)}")
 
@@ -2107,7 +2107,7 @@ def bot_has_permissions(**perms: bool) -> Callable[[T], T]:
     that is inherited from :exc:`.CheckFailure`.
     """
 
-    invalid = set(perms) - set(selfcord.Permissions.VALID_FLAGS)
+    invalid = set(perms) - set(Permissions.VALID_FLAGS)
     if invalid:
         raise TypeError(f"Invalid permission(s): {', '.join(invalid)}")
 
@@ -2136,7 +2136,7 @@ def has_guild_permissions(**perms: bool) -> Callable[[T], T]:
     .. versionadded:: 1.3
     """
 
-    invalid = set(perms) - set(selfcord.Permissions.VALID_FLAGS)
+    invalid = set(perms) - set(Permissions.VALID_FLAGS)
     if invalid:
         raise TypeError(f"Invalid permission(s): {', '.join(invalid)}")
 
@@ -2162,7 +2162,7 @@ def bot_has_guild_permissions(**perms: bool) -> Callable[[T], T]:
     .. versionadded:: 1.3
     """
 
-    invalid = set(perms) - set(selfcord.Permissions.VALID_FLAGS)
+    invalid = set(perms) - set(Permissions.VALID_FLAGS)
     if invalid:
         raise TypeError(f"Invalid permission(s): {', '.join(invalid)}")
 
@@ -2249,7 +2249,7 @@ def is_nsfw() -> Callable[[T], T]:
 
     def pred(ctx: Context[BotT]) -> bool:
         ch = ctx.channel
-        if ctx.guild is None or (isinstance(ch, (selfcord.TextChannel, selfcord.Thread)) and ch.is_nsfw()):
+        if ctx.guild is None or (isinstance(ch, (TextChannel, Thread)) and ch.is_nsfw()):
             return True
         raise NSFWChannelRequired(ch)  # type: ignore
 
@@ -2304,7 +2304,7 @@ def dynamic_cooldown(
     """A decorator that adds a dynamic cooldown to a :class:`.Command`
 
     This differs from :func:`.cooldown` in that it takes a function that
-    accepts a single parameter of type :class:`.selfcord.Message` and must
+    accepts a single parameter of type :class:`.Message` and must
     return a :class:`.Cooldown` or ``None``.
     If ``None`` is returned then that cooldown is effectively bypassed.
 
