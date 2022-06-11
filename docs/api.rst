@@ -1,9 +1,9 @@
-.. currentmodule:: discord
+.. currentmodule:: selfcord
 
 API Reference
 ===============
 
-The following section outlines the API of discord.py-self.
+The following section outlines the API of selfcord.py-self.
 
 .. note::
 
@@ -11,7 +11,7 @@ The following section outlines the API of discord.py-self.
     in an output independent way.  If the logging module is not configured,
     these logs will not be output anywhere.  See :ref:`logging_setup` for
     more information on how to set up and use the logging module with
-    discord.py-self.
+    selfcord.py-self.
 
 Version Related Info
 ---------------------
@@ -124,11 +124,11 @@ PCMVolumeTransformer
 Opus Library
 ~~~~~~~~~~~~~
 
-.. autofunction:: discord.opus.load_opus
+.. autofunction:: selfcord.opus.load_opus
 
-.. autofunction:: discord.opus.is_loaded
+.. autofunction:: selfcord.opus.is_loaded
 
-.. _discord-api-events:
+.. _selfcord-api-events:
 
 Event Reference
 ---------------
@@ -139,9 +139,9 @@ There are two ways to register an event, the first way is through the use of
 :meth:`Client.event`. The second way is through subclassing :class:`Client` and
 overriding the specific events. For example: ::
 
-    import discord
+    import selfcord
 
-    class MyClient(discord.Client):
+    class MyClient(selfcord.Client):
         async def on_message(self, message):
             if message.author != self.user:
                 return
@@ -1139,30 +1139,30 @@ Voice
     :param after: The voice state after the changes.
     :type after: :class:`VoiceState`
 
-.. _discord-api-utils:
+.. _selfcord-api-utils:
 
 Utility Functions
 -----------------
 
-.. autofunction:: discord.utils.find
+.. autofunction:: selfcord.utils.find
 
-.. autofunction:: discord.utils.get
+.. autofunction:: selfcord.utils.get
 
-.. autofunction:: discord.utils.snowflake_time
+.. autofunction:: selfcord.utils.snowflake_time
 
-.. autofunction:: discord.utils.time_snowflake
+.. autofunction:: selfcord.utils.time_snowflake
 
-.. autofunction:: discord.utils.oauth_url
+.. autofunction:: selfcord.utils.oauth_url
 
-.. autofunction:: discord.utils.remove_markdown
+.. autofunction:: selfcord.utils.remove_markdown
 
-.. autofunction:: discord.utils.escape_markdown
+.. autofunction:: selfcord.utils.escape_markdown
 
-.. autofunction:: discord.utils.escape_mentions
+.. autofunction:: selfcord.utils.escape_mentions
 
 .. class:: ResolvedInvite
 
-    A data class which represents a resolved invite returned from :func:`discord.utils.resolve_invite`.
+    A data class which represents a resolved invite returned from :func:`selfcord.utils.resolve_invite`.
 
     .. attribute:: code
 
@@ -1176,21 +1176,21 @@ Utility Functions
 
         :type: Optional[:class:`int`]
 
-.. autofunction:: discord.utils.resolve_invite
+.. autofunction:: selfcord.utils.resolve_invite
 
-.. autofunction:: discord.utils.resolve_template
+.. autofunction:: selfcord.utils.resolve_template
 
-.. autofunction:: discord.utils.sleep_until
+.. autofunction:: selfcord.utils.sleep_until
 
-.. autofunction:: discord.utils.utcnow
+.. autofunction:: selfcord.utils.utcnow
 
-.. autofunction:: discord.utils.format_dt
+.. autofunction:: selfcord.utils.format_dt
 
-.. autofunction:: discord.utils.as_chunks
+.. autofunction:: selfcord.utils.as_chunks
 
-.. autofunction:: discord.utils.set_target
+.. autofunction:: selfcord.utils.set_target
 
-.. _discord-api-enums:
+.. _selfcord-api-enums:
 
 Enumerations
 -------------
@@ -1461,7 +1461,7 @@ of :class:`enum.Enum`.
     .. attribute:: verified_bot_developer
 
         The user is an Early Verified Bot Developer.
-    .. attribute:: discord_certified_moderator
+    .. attribute:: selfcord_certified_moderator
 
         The user is a Discord Certified Moderator.
     .. attribute:: bot_http_interactions
@@ -3305,7 +3305,7 @@ of :class:`enum.Enum`.
 
         An attachment parameter.
 
-.. _discord-api-audit-logs:
+.. _selfcord-api-audit-logs:
 
 Audit Log Data
 ----------------
@@ -3898,7 +3898,7 @@ AuditLogDiff
 Webhook Support
 ------------------
 
-discord.py-self offers support for creating, editing, and executing webhooks through the :class:`Webhook` class.
+selfcord.py-self offers support for creating, editing, and executing webhooks through the :class:`Webhook` class.
 
 Webhook
 ~~~~~~~~~
@@ -3950,7 +3950,7 @@ PartialWebhookChannel
 .. autoclass:: PartialWebhookChannel()
     :members:
 
-.. _discord_api_abcs:
+.. _selfcord_api_abcs:
 
 Abstract Base Classes
 -----------------------
@@ -3965,64 +3965,64 @@ This library has a module related to abstract base classes, in which all the ABC
 Snowflake
 ~~~~~~~~~~
 
-.. attributetable:: discord.abc.Snowflake
+.. attributetable:: selfcord.abc.Snowflake
 
-.. autoclass:: discord.abc.Snowflake()
+.. autoclass:: selfcord.abc.Snowflake()
     :members:
 
 User
 ~~~~~
 
-.. attributetable:: discord.abc.User
+.. attributetable:: selfcord.abc.User
 
-.. autoclass:: discord.abc.User()
+.. autoclass:: selfcord.abc.User()
     :members:
 
 PrivateChannel
 ~~~~~~~~~~~~~~~
 
-.. attributetable:: discord.abc.PrivateChannel
+.. attributetable:: selfcord.abc.PrivateChannel
 
-.. autoclass:: discord.abc.PrivateChannel()
+.. autoclass:: selfcord.abc.PrivateChannel()
     :members:
 
 GuildChannel
 ~~~~~~~~~~~~~
 
-.. attributetable:: discord.abc.GuildChannel
+.. attributetable:: selfcord.abc.GuildChannel
 
-.. autoclass:: discord.abc.GuildChannel()
+.. autoclass:: selfcord.abc.GuildChannel()
     :members:
 
 Messageable
 ~~~~~~~~~~~~
 
-.. attributetable:: discord.abc.Messageable
+.. attributetable:: selfcord.abc.Messageable
 
-.. autoclass:: discord.abc.Messageable()
+.. autoclass:: selfcord.abc.Messageable()
     :members:
     :exclude-members: typing
 
-    .. automethod:: discord.abc.Messageable.typing
+    .. automethod:: selfcord.abc.Messageable.typing
         :async-with:
 
 Connectable
 ~~~~~~~~~~~~
 
-.. attributetable:: discord.abc.Connectable
+.. attributetable:: selfcord.abc.Connectable
 
-.. autoclass:: discord.abc.Connectable()
+.. autoclass:: selfcord.abc.Connectable()
     :members:
 
 ApplicationCommand
 ~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: discord.abc.ApplicationCommand
+.. attributetable:: selfcord.abc.ApplicationCommand
 
-.. autoclass:: discord.abc.ApplicationCommand()
+.. autoclass:: selfcord.abc.ApplicationCommand()
     :members:
 
-.. _discord_api_models:
+.. _selfcord_api_models:
 
 Discord Models
 ---------------
@@ -4041,7 +4041,7 @@ the user of the library.
     If you want to get one of these model classes instances they'd have to be through
     the cache, and a common way of doing so is through the :func:`utils.find` function
     or attributes of model classes that you receive from the events specified in the
-    :ref:`discord-api-events`.
+    :ref:`selfcord-api-events`.
 
 .. note::
 
@@ -4669,14 +4669,14 @@ Raw Events
 .. autoclass:: RawIntegrationDeleteEvent()
     :members:
 
-.. _discord_api_data:
+.. _selfcord_api_data:
 
 Data Classes
 --------------
 
 Some classes are just there to be data containers, this lists them.
 
-Unlike :ref:`models <discord_api_models>` you are allowed to create
+Unlike :ref:`models <selfcord_api_models>` you are allowed to create
 most of these yourself, even if they can also be used to hold attributes.
 
 Nearly all classes here have :ref:`py:slots` defined which means that it is
@@ -4848,9 +4848,9 @@ The following exceptions are thrown by the library.
 
 .. autoexception:: ConnectionClosed
 
-.. autoexception:: discord.opus.OpusError
+.. autoexception:: selfcord.opus.OpusError
 
-.. autoexception:: discord.opus.OpusNotLoaded
+.. autoexception:: selfcord.opus.OpusNotLoaded
 
 Exception Hierarchy
 ~~~~~~~~~~~~~~~~~~~~~

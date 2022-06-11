@@ -1,4 +1,4 @@
-.. currentmodule:: discord
+.. currentmodule:: selfcord
 
 .. _migrating_2_0:
 
@@ -24,7 +24,7 @@ asyncio Event Loop Changes
 
 Python 3.7 introduced a new helper function :func:`asyncio.run` which automatically creates and destroys the asynchronous event loop.
 
-In order to support this, the way discord.py-self handles the :mod:`asyncio` event loop has changed.
+In order to support this, the way selfcord.py-self handles the :mod:`asyncio` event loop has changed.
 
 This allows you to rather than using :meth:`Client.run` create your own asynchronous loop to setup other asynchronous code as needed.
 
@@ -32,7 +32,7 @@ Quick example:
 
 .. code-block:: python
 
-    client = discord.Client()
+    client = selfcord.Client()
 
     async def main():
         # do other async things
@@ -45,7 +45,7 @@ Quick example:
     asyncio.run(main())
 
 A new :meth:`~Client.setup_hook` method has also been added to the :class:`Client` class.
-This method is called after login but before connecting to the discord gateway.
+This method is called after login but before connecting to the selfcord gateway.
 
 It is intended to be used to setup various bot features in an asynchronous context.
 
@@ -55,7 +55,7 @@ Quick example:
 
 .. code-block:: python
 
-    class MyClient(discord.Client):
+    class MyClient(selfcord.Client):
         async def setup_hook(self):
             print('This is asynchronous!')
 
@@ -70,7 +70,7 @@ see :ref:`migrating_2_0_commands_extension_cog_async` for more information.
 Abstract Base Classes Changes
 -------------------------------
 
-:ref:`discord_api_abcs` that inherited from :class:`abc.ABCMeta` now inherit from :class:`typing.Protocol`.
+:ref:`selfcord_api_abcs` that inherited from :class:`abc.ABCMeta` now inherit from :class:`typing.Protocol`.
 
 This results in a change of the base metaclass used by these classes
 but this should generally be completely transparent to the user.
@@ -121,7 +121,7 @@ Quick example:
 
     # after
     # The new helper function can be used here:
-    week_ago = discord.utils.utcnow() - datetime.timedelta(days=7)
+    week_ago = selfcord.utils.utcnow() - datetime.timedelta(days=7)
     # ...or the equivalent result can be achieved with datetime.datetime.now():
     week_ago = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=7)
     if member.created_at > week_ago:
@@ -205,12 +205,12 @@ Quick example for asynchronous webhooks:
 
     # before
     async with aiohttp.ClientSession() as session:
-        webhook = discord.Webhook.from_url('url-here', adapter=discord.AsyncWebhookAdapter(session))
+        webhook = selfcord.Webhook.from_url('url-here', adapter=selfcord.AsyncWebhookAdapter(session))
         await webhook.send('Hello World', username='Foo')
 
     # after
     async with aiohttp.ClientSession() as session:
-        webhook = discord.Webhook.from_url('url-here', session=session)
+        webhook = selfcord.Webhook.from_url('url-here', session=session)
         await webhook.send('Hello World', username='Foo')
 
 Quick example for synchronous webhooks:
@@ -218,11 +218,11 @@ Quick example for synchronous webhooks:
 .. code:: python
 
     # before
-    webhook = discord.Webhook.partial(123456, 'token-here', adapter=discord.RequestsWebhookAdapter())
+    webhook = selfcord.Webhook.partial(123456, 'token-here', adapter=selfcord.RequestsWebhookAdapter())
     webhook.send('Hello World', username='Foo')
 
     # after
-    webhook = discord.SyncWebhook.partial(123456, 'token-here')
+    webhook = selfcord.SyncWebhook.partial(123456, 'token-here')
     webhook.send('Hello World', username='Foo')
 
 The following breaking changes have been made:
@@ -676,7 +676,7 @@ This means that usage of the following utility methods is no longer possible:
         while True:
             try:
                 message = await self.next()
-            except discord.NoMoreItems:
+            except selfcord.NoMoreItems:
                 break
             print(f'Found message with ID {message.id}')
 
@@ -713,7 +713,7 @@ This means that usage of the following utility methods is no longer possible:
         msg = await channel.history().get(author__name='Dave')
 
         # after
-        msg = await discord.utils.get(channel.history(), author__name='Dave')
+        msg = await selfcord.utils.get(channel.history(), author__name='Dave')
 
 - ``AsyncIterator.find()``
 
@@ -726,7 +726,7 @@ This means that usage of the following utility methods is no longer possible:
         event = await guild.audit_logs().find(predicate)
 
         # after
-        event = await discord.utils.find(predicate, guild.audit_logs())
+        event = await selfcord.utils.find(predicate, guild.audit_logs())
 
 - ``AsyncIterator.flatten()``
 
@@ -747,7 +747,7 @@ This means that usage of the following utility methods is no longer possible:
             ...
 
         # after
-        async for leader, *users in discord.utils.as_chunks(reaction.users(), 3):
+        async for leader, *users in selfcord.utils.as_chunks(reaction.users(), 3):
             ...
 
 - ``AsyncIterator.map()``
@@ -804,11 +804,11 @@ Therefore, ``Embed.Empty`` has been removed in favour of ``None``.
 .. code-block:: python
 
     # before
-    embed = discord.Embed(title='foo')
-    embed.title = discord.Embed.Empty
+    embed = selfcord.Embed(title='foo')
+    embed.title = selfcord.Embed.Empty
 
     # after
-    embed = discord.Embed(title='foo')
+    embed = selfcord.Embed(title='foo')
     embed.title = None
 
 
@@ -1104,7 +1104,7 @@ The following changes have been made:
             'emojis': 'Emojis Intent',
             ...,
         }
-        for name, value in discord.Intents.all():
+        for name, value in selfcord.Intents.all():
             print(f'{friendly_names[name]}: {value}')
 
         # after
@@ -1113,7 +1113,7 @@ The following changes have been made:
             'emojis_and_stickers': 'Emojis Intent',
             ...,
         }
-        for name, value in discord.Intents.all():
+        for name, value in selfcord.Intents.all():
             print(f'{friendly_names[name]}: {value}')
 
 - ``created_at`` is no longer part of :class:`abc.Snowflake`.

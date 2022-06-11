@@ -1,8 +1,8 @@
-import discord
+import selfcord
 import asyncio
 
 
-class MyClient(discord.Client):
+class MyClient(selfcord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

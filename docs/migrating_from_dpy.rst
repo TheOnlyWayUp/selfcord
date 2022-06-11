@@ -1,11 +1,11 @@
-.. currentmodule:: discord
+.. currentmodule:: selfcord
 
 .. _migrating_from_dpy:
 
 Migrating to This Library
 ==========================
 
-| This library is designed to be compatible with discord.py.
+| This library is designed to be compatible with selfcord.py.
 | However, the user and bot APIs are *not* the same.
 
 Most things bots can do, users can (in some capacity) as well.
@@ -15,8 +15,8 @@ For example:
 
 - ``Intents``: While the gateway technically accepts Intents for user accounts (and even modifies payloads to be a little more like bot payloads), it leads to breakage. Additionally, it's a giant waving red flag to Discord.
 - ``Shards``: Again, technically accepted but useless.
-- ``discord.ui``: Users cannot send items from the bot UI kit.
-- ``discord.app_commands``: Users cannot register application commands.
+- ``selfcord.ui``: Users cannot send items from the bot UI kit.
+- ``selfcord.app_commands``: Users cannot register application commands.
 
 Additionally, existing payloads and headers have been heavily changed to match the Discord client.
 

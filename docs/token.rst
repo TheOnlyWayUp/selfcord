@@ -34,7 +34,7 @@ To obtain your token from the Discord client, the easiest way is pasting this in
 
 .. code:: js
 
-    (webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m => m?.exports?.default?.getToken).exports.default.getToken()
+    (webpackChunkselfcord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m => m?.exports?.default?.getToken).exports.default.getToken()
 
 
 Or, you can do it manually:

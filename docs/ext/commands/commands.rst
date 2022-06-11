@@ -1,4 +1,4 @@
-.. currentmodule:: discord
+.. currentmodule:: selfcord
 
 .. _ext_commands_commands:
 
@@ -33,7 +33,7 @@ as seen in the example above. The second is using the :func:`~ext.commands.comma
 
 Essentially, these two are equivalent: ::
 
-    from discord.ext import commands
+    from selfcord.ext import commands
 
     bot = commands.Bot(command_prefix='$')
 
@@ -52,7 +52,7 @@ Essentially, these two are equivalent: ::
 Since the :meth:`.Bot.command` decorator is shorter and easier to comprehend, it will be the one used throughout the
 documentation here.
 
-Any parameter that is accepted by the :class:`~discord.ext.commands.Command` constructor can be passed into the decorator. For example, to change
+Any parameter that is accepted by the :class:`~selfcord.ext.commands.Command` constructor can be passed into the decorator. For example, to change
 the name to something other than the function would be as simple as doing this:
 
 .. code-block:: python3
@@ -357,7 +357,7 @@ This can get tedious, so an inline advanced converter is possible through a :fun
 Discord Converters
 ++++++++++++++++++++
 
-Working with :ref:`discord_api_models` is a fairly common thing when defining commands, as a result the library makes
+Working with :ref:`selfcord_api_models` is a fairly common thing when defining commands, as a result the library makes
 working with them easy.
 
 For example, to receive a :class:`Member` you can just pass it as a converter:
@@ -365,14 +365,14 @@ For example, to receive a :class:`Member` you can just pass it as a converter:
 .. code-block:: python3
 
     @bot.command()
-    async def joined(ctx, *, member: discord.Member):
+    async def joined(ctx, *, member: selfcord.Member):
         await ctx.send(f'{member} joined on {member.joined_at}')
 
 When this command is executed, it attempts to convert the string given into a :class:`Member` and then passes it as a
 parameter for the function. This works by checking if the string is a mention, an ID, a nickname, a username + discriminator,
 or just a regular username. The default set of converters have been written to be as easy to use as possible.
 
-A lot of discord models work out of the gate as a parameter:
+A lot of selfcord models work out of the gate as a parameter:
 
 - :class:`Object` (since v2.0)
 - :class:`Member`
@@ -479,13 +479,13 @@ a singular type. For example, given the following:
     import typing
 
     @bot.command()
-    async def union(ctx, what: typing.Union[discord.TextChannel, discord.Member]):
+    async def union(ctx, what: typing.Union[selfcord.TextChannel, selfcord.Member]):
         await ctx.send(what)
 
 
-The ``what`` parameter would either take a :class:`discord.TextChannel` converter or a :class:`discord.Member` converter.
+The ``what`` parameter would either take a :class:`selfcord.TextChannel` converter or a :class:`selfcord.Member` converter.
 The way this works is through a left-to-right order. It first attempts to convert the input to a
-:class:`discord.TextChannel`, and if it fails it tries to convert it to a :class:`discord.Member`. If all converters fail,
+:class:`selfcord.TextChannel`, and if it fails it tries to convert it to a :class:`selfcord.Member`. If all converters fail,
 then a special error is raised, :exc:`~ext.commands.BadUnionArgument`.
 
 Note that any valid converter discussed above can be passed in to the argument list of a :data:`typing.Union`.
@@ -550,7 +550,7 @@ Consider the following example:
 .. code-block:: python3
 
     @bot.command()
-    async def slap(ctx, members: commands.Greedy[discord.Member], *, reason='no reason'):
+    async def slap(ctx, members: commands.Greedy[selfcord.Member], *, reason='no reason'):
         slapped = ", ".join(x.name for x in members)
         await ctx.send(f'{slapped} just got slapped for {reason}')
 
@@ -573,7 +573,7 @@ When mixed with the :data:`typing.Optional` converter you can provide simple and
     import typing
 
     @bot.command()
-    async def ban(ctx, members: commands.Greedy[discord.Member],
+    async def ban(ctx, members: commands.Greedy[selfcord.Member],
                        delete_days: typing.Optional[int] = 0, *,
                        reason: str):
         """Mass bans members with an optional delete_days parameter"""
@@ -594,7 +594,7 @@ This command can be invoked any of the following ways:
     The usage of :class:`~ext.commands.Greedy` and :data:`typing.Optional` are powerful and useful, however as a
     price, they open you up to some parsing ambiguities that might surprise some people.
 
-    For example, a signature expecting a :data:`typing.Optional` of a :class:`discord.Member` followed by a
+    For example, a signature expecting a :data:`typing.Optional` of a :class:`selfcord.Member` followed by a
     :class:`int` could catch a member named after a number due to the different ways a
     :class:`~ext.commands.MemberConverter` decides to fetch members. You should take care to not introduce
     unintended parsing ambiguities in your code. One technique would be to clamp down the expected syntaxes
@@ -617,11 +617,11 @@ For example, the following code:
 
 .. code-block:: python3
 
-    from discord.ext import commands
-    import discord
+    from selfcord.ext import commands
+    import selfcord
 
     class BanFlags(commands.FlagConverter):
-        member: discord.Member
+        member: selfcord.Member
         reason: str
         days: int = 1
 
@@ -652,7 +652,7 @@ or the default value then the :func:`~ext.commands.flag` function can come in ha
     from typing import List
 
     class BanFlags(commands.FlagConverter):
-        members: List[discord.Member] = commands.flag(name='member', default=lambda ctx: [])
+        members: List[selfcord.Member] = commands.flag(name='member', default=lambda ctx: [])
 
 This tells the parser that the ``members`` attribute is mapped to a flag named ``member`` and that
 the default value is an empty list. For greater customisability, the default can either be a value or a callable
@@ -696,12 +696,12 @@ For example, augmenting the example above:
 
 .. code-block:: python3
 
-    from discord.ext import commands
+    from selfcord.ext import commands
     from typing import List
-    import discord
+    import selfcord
 
     class BanFlags(commands.FlagConverter):
-        members: List[discord.Member] = commands.flag(name='member')
+        members: List[selfcord.Member] = commands.flag(name='member')
         reason: str
         days: int = 1
 
@@ -726,12 +726,12 @@ allows for "greedy-like" semantics using a variadic tuple:
 
 .. code-block:: python3
 
-    from discord.ext import commands
+    from selfcord.ext import commands
     from typing import Tuple
-    import discord
+    import selfcord
 
     class BanFlags(commands.FlagConverter):
-        members: Tuple[discord.Member, ...]
+        members: Tuple[selfcord.Member, ...]
         reason: str
         days: int = 1
 
@@ -798,7 +798,7 @@ This is useful for:
   .. code-block:: python3
 
       @bot.command()
-      async def wave(to: discord.User = commands.parameter(default=lambda ctx: ctx.author)):
+      async def wave(to: selfcord.User = commands.parameter(default=lambda ctx: ctx.author)):
           await ctx.send(f'Hello {to.mention} :wave:')
 
   Because this is such a common use-case, the library provides :obj:`~.ext.commands.Author`, :obj:`~.ext.commands.CurrentChannel` and
@@ -807,7 +807,7 @@ This is useful for:
   .. code-block:: python3
 
       @bot.command()
-      async def wave(to: discord.User = commands.Author):
+      async def wave(to: selfcord.User = commands.Author):
           await ctx.send(f'Hello {to.mention} :wave:')
 
   :obj:`~.ext.commands.Author` and co also have other benefits like having the displayed default being filled.
@@ -822,16 +822,16 @@ When our commands fail to parse we will, by default, receive a noisy error in ``
 that an error has happened and has been silently ignored.
 
 In order to handle our errors, we must use something called an error handler. There is a global error handler, called
-:func:`.on_command_error` which works like any other event in the :ref:`discord-api-events`. This global error handler is
+:func:`.on_command_error` which works like any other event in the :ref:`selfcord-api-events`. This global error handler is
 called for every error reached.
 
 Most of the time however, we want to handle an error local to the command itself. Luckily, commands come with local error
-handlers that allow us to do just that. First we decorate an error handler function with :meth:`~discord.ext.commands.Command.error`:
+handlers that allow us to do just that. First we decorate an error handler function with :meth:`~selfcord.ext.commands.Command.error`:
 
 .. code-block:: python3
 
     @bot.command()
-    async def info(ctx, *, member: discord.Member):
+    async def info(ctx, *, member: selfcord.Member):
         """Tells you some info about the member."""
         msg = f'{member} joined on {member.joined_at} and has {len(member.roles)} roles.'
         await ctx.send(msg)

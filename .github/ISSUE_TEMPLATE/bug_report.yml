@@ -43,7 +43,7 @@ body:
     attributes:
       label: System Information
       description: >
-        Run `python -m discord -v` and paste this information below.
+        Run `python -m selfcord -v` and paste this information below.
     validations:
       required: true
   - type: checkboxes

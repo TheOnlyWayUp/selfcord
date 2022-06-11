@@ -1,17 +1,17 @@
-discord.py-self
+selfcord.py-self
 ================
 
 .. image:: https://img.shields.io/endpoint?url=https%3A%2F%2Frunkit.io%2Fdamiankrawczyk%2Ftelegram-badge%2Fbranches%2Fmaster%3Furl%3Dhttps%3A%2F%2Ft.me%2Fdpy_self
    :target: https://t.me/dpy_self
    :alt: Telegram chat
-.. image:: https://img.shields.io/pypi/v/discord.py-self.svg
-   :target: https://pypi.python.org/pypi/discord.py-self
+.. image:: https://img.shields.io/pypi/v/selfcord.py-self.svg
+   :target: https://pypi.python.org/pypi/selfcord.py-self
    :alt: PyPI version info
-.. image:: https://img.shields.io/pypi/pyversions/discord.py.svg
-   :target: https://pypi.python.org/pypi/discord.py-self
+.. image:: https://img.shields.io/pypi/pyversions/selfcord.py.svg
+   :target: https://pypi.python.org/pypi/selfcord.py-self
    :alt: PyPI supported Python versions
-.. image:: https://img.shields.io/pypi/dm/discord.py-self.svg
-   :target: https://pypi.python.org/pypi/discord.py-self
+.. image:: https://img.shields.io/pypi/dm/selfcord.py-self.svg
+   :target: https://pypi.python.org/pypi/selfcord.py-self
    :alt: PyPI downloads per month
 
 A modern, easy to use, feature-rich, and async ready API wrapper for Discord's user API written in Python.
@@ -19,7 +19,7 @@ A modern, easy to use, feature-rich, and async ready API wrapper for Discord's u
 Fork Changes
 ------------
 
-These changes have become too numerous to mention, so check out our `docs <https://discordpy-self.readthedocs.io/en/latest/index.html>`_.
+These changes have become too numerous to mention, so check out our `docs <https://selfcordpy-self.readthedocs.io/en/latest/index.html>`_.
 
 | **Credits:**
 | - `arandomnewaccount <https://www.reddit.com/user/obviouslymymain123/>`_ for Discord API help.
@@ -34,7 +34,7 @@ Key Features
 - Modern Pythonic API using ``async`` and ``await``.
 - Proper rate limit handling.
 - Optimised in both speed and memory.
-- Mostly compatible with the official ``discord.py``.
+- Mostly compatible with the official ``selfcord.py``.
 - Prevents selfbot detection.
 
 Installing
@@ -47,28 +47,28 @@ To install the library without full voice support, you can just run the followin
 .. code:: sh
 
     # Linux/macOS
-    python3 -m pip install -U discord.py-self
+    python3 -m pip install -U selfcord.py-self
 
     # Windows
-    py -3 -m pip install -U discord.py-self
+    py -3 -m pip install -U selfcord.py-self
 
 Otherwise to get voice support you should run the following command:
 
 .. code:: sh
 
     # Linux/macOS
-    python3 -m pip install -U "discord.py-self[voice]"
+    python3 -m pip install -U "selfcord.py-self[voice]"
 
     # Windows
-    py -3 -m pip install -U discord.py-self[voice]
+    py -3 -m pip install -U selfcord.py-self[voice]
 
 
 To install the development version, do the following:
 
 .. code:: sh
 
-    $ git clone https://github.com/dolfies/discord.py-self
-    $ cd discord.py-self
+    $ git clone https://github.com/dolfies/selfcord.py-self
+    $ cd selfcord.py-self
     $ python3 -m pip install -U .[voice]
 
 
@@ -87,9 +87,9 @@ Quick Example
 
 .. code:: py
 
-    import discord
+    import selfcord
 
-    class MyClient(discord.Client):
+    class MyClient(selfcord.Client):
         async def on_ready(self):
             print('Logged on as', self.user)
 
@@ -109,8 +109,8 @@ Bot Example
 
 .. code:: py
 
-    import discord
-    from discord.ext import commands
+    import selfcord
+    from selfcord.ext import commands
 
     bot = commands.Bot(command_prefix='>', self_bot=True)
 
@@ -125,6 +125,6 @@ You can find more examples in the examples directory.
 Links
 ------
 
-- `Documentation <https://discordpy-self.readthedocs.io/en/latest/index.html>`_
+- `Documentation <https://selfcordpy-self.readthedocs.io/en/latest/index.html>`_
 - `Project updates <https://t.me/dpy_self>`_
 - `Discussion & support <https://t.me/dpy_self_discussions>`_

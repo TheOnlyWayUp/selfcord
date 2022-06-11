@@ -1,10 +1,10 @@
-Welcome to discord.py-self
+Welcome to selfcord.py-self
 ===========================
 
 .. image:: /images/snake.svg
 .. image:: /images/snake_dark.svg
 
-discord.py-self is a modern, easy to use, feature-rich, and async ready API wrapper
+selfcord.py-self is a modern, easy to use, feature-rich, and async ready API wrapper
 for the Discord user APIs.
 
 **Features:**
@@ -21,7 +21,7 @@ Getting started
 
 Is this your first time using the library? This is the place to get started!
 
-- **Migrating from discord.py:** :doc:`migrating_from_dpy`
+- **Migrating from selfcord.py:** :doc:`migrating_from_dpy`
 - **First steps:** :doc:`intro` | :doc:`quickstart` | :doc:`logging`
 - **Working with Discord:** :doc:`token`
 - **Examples:** Many examples are available in the :resource:`repository <examples>`
@@ -59,8 +59,8 @@ These pages go into great detail about everything the API can do.
   :maxdepth: 1
 
   api
-  discord.ext.commands API Reference <ext/commands/api.rst>
-  discord.ext.tasks API Reference <ext/tasks/index.rst>
+  selfcord.ext.commands API Reference <ext/commands/api.rst>
+  selfcord.ext.tasks API Reference <ext/tasks/index.rst>
 
 Meta
 ------

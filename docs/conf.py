@@ -1,5 +1,5 @@
 #
-# discord.py documentation build configuration file, created by
+# selfcord.py documentation build configuration file, created by
 # sphinx-quickstart on Fri Aug 21 05:43:30 2015.
 #
 # This file is execfile()d with the current directory set to its
@@ -50,7 +50,7 @@ autodoc_typehints = 'none'
 # napoleon_attr_annotations = False
 
 extlinks = {
-    'issue': ('https://github.com/dolfies/discord.py-self/issues/%s', 'GH-'),
+    'issue': ('https://github.com/dolfies/selfcord.py-self/issues/%s', 'GH-'),
 }
 
 # Links used for cross-referencing stuff in other documentation
@@ -80,7 +80,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'discord.py-self'
+project = 'selfcord.py-self'
 copyright = '2015-present, Rapptz and 2021-present, Dolfies'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -90,7 +90,7 @@ copyright = '2015-present, Rapptz and 2021-present, Dolfies'
 # The short X.Y version.
 
 version = ''
-with open('../discord/__init__.py') as f:
+with open('../selfcord/__init__.py') as f:
     version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1)
 
 # The full version, including alpha/beta/rc tags.
@@ -174,16 +174,16 @@ html_experimental_html5_writer = True
 html_theme = 'basic'
 
 html_context = {
-  'discord_extensions': [
-    ('discord.ext.commands', 'ext/commands'),
-    ('discord.ext.tasks', 'ext/tasks'),
+  'selfcord_extensions': [
+    ('selfcord.ext.commands', 'ext/commands'),
+    ('selfcord.ext.tasks', 'ext/tasks'),
   ],
 }
 
 resource_links = {
-  'issues': 'https://github.com/dolfies/discord.py-self/issues',
-  'discussions': 'https://github.com/dolfies/discord.py-self/discussions',
-  'examples': f'https://github.com/dolfies/discord.py-self/tree/{branch}/examples',
+  'issues': 'https://github.com/dolfies/selfcord.py-self/issues',
+  'discussions': 'https://github.com/dolfies/selfcord.py-self/discussions',
+  'examples': f'https://github.com/dolfies/selfcord.py-self/tree/{branch}/examples',
 }
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -209,7 +209,7 @@ resource_links = {
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-html_favicon = './images/discord_py_logo.ico'
+html_favicon = './images/selfcord_py_logo.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -284,7 +284,7 @@ html_js_files = [
 ]
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'discord.pydoc'
+htmlhelp_basename = 'selfcord.pydoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -306,7 +306,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'discord.py-self.tex', 'discord.py-self Documentation',
+  ('index', 'selfcord.py-self.tex', 'selfcord.py-self Documentation',
    'Dolfies', 'manual'),
 ]
 
@@ -336,7 +336,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'discord.py-self', 'discord.py-self Documentation',
+    ('index', 'selfcord.py-self', 'selfcord.py-self Documentation',
      ['Dolfies'], 1)
 ]
 
@@ -350,8 +350,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'discord.py=self', 'discord.py-self Documentation',
-   'Dolfies', 'discord.py-self', 'One line description of project.',
+  ('index', 'selfcord.py=self', 'selfcord.py-self Documentation',
+   'Dolfies', 'selfcord.py-self', 'One line description of project.',
    'Miscellaneous'),
 ]
 

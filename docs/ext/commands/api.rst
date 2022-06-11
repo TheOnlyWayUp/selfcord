@@ -1,9 +1,9 @@
-.. currentmodule:: discord
+.. currentmodule:: selfcord
 
 API Reference
 ===============
 
-The following section outlines the API of discord.py's command extension module.
+The following section outlines the API of selfcord.py's command extension module.
 
 .. _ext_commands_api_bot:
 
@@ -13,9 +13,9 @@ Bots
 Bot
 ~~~~
 
-.. attributetable:: discord.ext.commands.Bot
+.. attributetable:: selfcord.ext.commands.Bot
 
-.. autoclass:: discord.ext.commands.Bot
+.. autoclass:: selfcord.ext.commands.Bot
     :members:
     :inherited-members:
     :exclude-members: after_invoke, before_invoke, check, check_once, command, event, group, listen
@@ -47,19 +47,19 @@ Bot
 Prefix Helpers
 ----------------
 
-.. autofunction:: discord.ext.commands.when_mentioned
+.. autofunction:: selfcord.ext.commands.when_mentioned
 
-.. autofunction:: discord.ext.commands.when_mentioned_or
+.. autofunction:: selfcord.ext.commands.when_mentioned_or
 
 .. _ext_commands_api_events:
 
 Event Reference
 -----------------
 
-These events function similar to :ref:`the regular events <discord-api-events>`, except they
+These events function similar to :ref:`the regular events <selfcord-api-events>`, except they
 are custom to the command extension module.
 
-.. function:: discord.ext.commands.on_command_error(ctx, error)
+.. function:: selfcord.ext.commands.on_command_error(ctx, error)
 
     An error handler that is called when an error is raised
     inside a command either through user input error, check
@@ -72,7 +72,7 @@ are custom to the command extension module.
     :param error: The error that was raised.
     :type error: :class:`.CommandError` derived
 
-.. function:: discord.ext.commands.on_command(ctx)
+.. function:: selfcord.ext.commands.on_command(ctx)
 
     An event that is called when a command is found and is about to be invoked.
 
@@ -82,7 +82,7 @@ are custom to the command extension module.
     :param ctx: The invocation context.
     :type ctx: :class:`.Context`
 
-.. function:: discord.ext.commands.on_command_completion(ctx)
+.. function:: selfcord.ext.commands.on_command_completion(ctx)
 
     An event that is called when a command has completed its invocation.
 
@@ -100,18 +100,18 @@ Commands
 Decorators
 ~~~~~~~~~~~~
 
-.. autofunction:: discord.ext.commands.command
+.. autofunction:: selfcord.ext.commands.command
     :decorator:
 
-.. autofunction:: discord.ext.commands.group
+.. autofunction:: selfcord.ext.commands.group
     :decorator:
 
 Command
 ~~~~~~~~~
 
-.. attributetable:: discord.ext.commands.Command
+.. attributetable:: selfcord.ext.commands.Command
 
-.. autoclass:: discord.ext.commands.Command
+.. autoclass:: selfcord.ext.commands.Command
     :members:
     :special-members: __call__
     :exclude-members: after_invoke, before_invoke, error
@@ -128,9 +128,9 @@ Command
 Group
 ~~~~~~
 
-.. attributetable:: discord.ext.commands.Group
+.. attributetable:: selfcord.ext.commands.Group
 
-.. autoclass:: discord.ext.commands.Group
+.. autoclass:: selfcord.ext.commands.Group
     :members:
     :inherited-members:
     :exclude-members: after_invoke, before_invoke, command, error, group
@@ -153,9 +153,9 @@ Group
 GroupMixin
 ~~~~~~~~~~~
 
-.. attributetable:: discord.ext.commands.GroupMixin
+.. attributetable:: selfcord.ext.commands.GroupMixin
 
-.. autoclass:: discord.ext.commands.GroupMixin
+.. autoclass:: selfcord.ext.commands.GroupMixin
     :members:
     :exclude-members: command, group
 
@@ -173,17 +173,17 @@ Cogs
 Cog
 ~~~~
 
-.. attributetable:: discord.ext.commands.Cog
+.. attributetable:: selfcord.ext.commands.Cog
 
-.. autoclass:: discord.ext.commands.Cog
+.. autoclass:: selfcord.ext.commands.Cog
     :members:
 
 CogMeta
 ~~~~~~~~
 
-.. attributetable:: discord.ext.commands.CogMeta
+.. attributetable:: selfcord.ext.commands.CogMeta
 
-.. autoclass:: discord.ext.commands.CogMeta
+.. autoclass:: selfcord.ext.commands.CogMeta
     :members:
 
 .. _ext_commands_help_command:
@@ -194,42 +194,42 @@ Help Commands
 HelpCommand
 ~~~~~~~~~~~~
 
-.. attributetable:: discord.ext.commands.HelpCommand
+.. attributetable:: selfcord.ext.commands.HelpCommand
 
-.. autoclass:: discord.ext.commands.HelpCommand
+.. autoclass:: selfcord.ext.commands.HelpCommand
     :members:
 
 DefaultHelpCommand
 ~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: discord.ext.commands.DefaultHelpCommand
+.. attributetable:: selfcord.ext.commands.DefaultHelpCommand
 
-.. autoclass:: discord.ext.commands.DefaultHelpCommand
+.. autoclass:: selfcord.ext.commands.DefaultHelpCommand
     :members:
     :exclude-members: send_bot_help, send_cog_help, send_group_help, send_command_help, prepare_help_command
 
 MinimalHelpCommand
 ~~~~~~~~~~~~~~~~~~~
 
-.. attributetable:: discord.ext.commands.MinimalHelpCommand
+.. attributetable:: selfcord.ext.commands.MinimalHelpCommand
 
-.. autoclass:: discord.ext.commands.MinimalHelpCommand
+.. autoclass:: selfcord.ext.commands.MinimalHelpCommand
     :members:
     :exclude-members: send_bot_help, send_cog_help, send_group_help, send_command_help, prepare_help_command
 
 Paginator
 ~~~~~~~~~~
 
-.. attributetable:: discord.ext.commands.Paginator
+.. attributetable:: selfcord.ext.commands.Paginator
 
-.. autoclass:: discord.ext.commands.Paginator
+.. autoclass:: selfcord.ext.commands.Paginator
     :members:
 
 Enums
 ------
 
 .. class:: BucketType
-    :module: discord.ext.commands
+    :module: selfcord.ext.commands
 
     Specifies a type of bucket for, e.g. a cooldown.
 
@@ -263,61 +263,61 @@ Enums
 Checks
 -------
 
-.. autofunction:: discord.ext.commands.check(predicate)
+.. autofunction:: selfcord.ext.commands.check(predicate)
     :decorator:
 
-.. autofunction:: discord.ext.commands.check_any(*checks)
+.. autofunction:: selfcord.ext.commands.check_any(*checks)
     :decorator:
 
-.. autofunction:: discord.ext.commands.has_role(item)
+.. autofunction:: selfcord.ext.commands.has_role(item)
     :decorator:
 
-.. autofunction:: discord.ext.commands.has_permissions(**perms)
+.. autofunction:: selfcord.ext.commands.has_permissions(**perms)
     :decorator:
 
-.. autofunction:: discord.ext.commands.has_guild_permissions(**perms)
+.. autofunction:: selfcord.ext.commands.has_guild_permissions(**perms)
     :decorator:
 
-.. autofunction:: discord.ext.commands.has_any_role(*items)
+.. autofunction:: selfcord.ext.commands.has_any_role(*items)
     :decorator:
 
-.. autofunction:: discord.ext.commands.bot_has_role(item)
+.. autofunction:: selfcord.ext.commands.bot_has_role(item)
     :decorator:
 
-.. autofunction:: discord.ext.commands.bot_has_permissions(**perms)
+.. autofunction:: selfcord.ext.commands.bot_has_permissions(**perms)
     :decorator:
 
-.. autofunction:: discord.ext.commands.bot_has_guild_permissions(**perms)
+.. autofunction:: selfcord.ext.commands.bot_has_guild_permissions(**perms)
     :decorator:
 
-.. autofunction:: discord.ext.commands.bot_has_any_role(*items)
+.. autofunction:: selfcord.ext.commands.bot_has_any_role(*items)
     :decorator:
 
-.. autofunction:: discord.ext.commands.cooldown(rate, per, type=discord.ext.commands.BucketType.default)
+.. autofunction:: selfcord.ext.commands.cooldown(rate, per, type=selfcord.ext.commands.BucketType.default)
     :decorator:
 
-.. autofunction:: discord.ext.commands.dynamic_cooldown(cooldown, type=BucketType.default)
+.. autofunction:: selfcord.ext.commands.dynamic_cooldown(cooldown, type=BucketType.default)
     :decorator:
 
-.. autofunction:: discord.ext.commands.max_concurrency(number, per=discord.ext.commands.BucketType.default, *, wait=False)
+.. autofunction:: selfcord.ext.commands.max_concurrency(number, per=selfcord.ext.commands.BucketType.default, *, wait=False)
     :decorator:
 
-.. autofunction:: discord.ext.commands.before_invoke(coro)
+.. autofunction:: selfcord.ext.commands.before_invoke(coro)
     :decorator:
 
-.. autofunction:: discord.ext.commands.after_invoke(coro)
+.. autofunction:: selfcord.ext.commands.after_invoke(coro)
     :decorator:
 
-.. autofunction:: discord.ext.commands.guild_only(,)
+.. autofunction:: selfcord.ext.commands.guild_only(,)
     :decorator:
 
-.. autofunction:: discord.ext.commands.dm_only(,)
+.. autofunction:: selfcord.ext.commands.dm_only(,)
     :decorator:
 
-.. autofunction:: discord.ext.commands.is_owner(,)
+.. autofunction:: selfcord.ext.commands.is_owner(,)
     :decorator:
 
-.. autofunction:: discord.ext.commands.is_nsfw(,)
+.. autofunction:: selfcord.ext.commands.is_nsfw(,)
     :decorator:
 
 .. _ext_commands_api_context:
@@ -325,22 +325,22 @@ Checks
 Cooldown
 ---------
 
-.. attributetable:: discord.ext.commands.Cooldown
+.. attributetable:: selfcord.ext.commands.Cooldown
 
-.. autoclass:: discord.ext.commands.Cooldown
+.. autoclass:: selfcord.ext.commands.Cooldown
     :members:
 
 Context
 --------
 
-.. attributetable:: discord.ext.commands.Context
+.. attributetable:: selfcord.ext.commands.Context
 
-.. autoclass:: discord.ext.commands.Context
+.. autoclass:: selfcord.ext.commands.Context
     :members:
     :inherited-members:
     :exclude-members: typing
 
-    .. automethod:: discord.ext.commands.Context.typing
+    .. automethod:: selfcord.ext.commands.Context.typing
         :async-with:
 
 .. _ext_commands_api_converters:
@@ -348,113 +348,113 @@ Context
 Converters
 ------------
 
-.. autoclass:: discord.ext.commands.Converter
+.. autoclass:: selfcord.ext.commands.Converter
     :members:
 
-.. autoclass:: discord.ext.commands.ObjectConverter
+.. autoclass:: selfcord.ext.commands.ObjectConverter
     :members:
 
-.. autoclass:: discord.ext.commands.MemberConverter
+.. autoclass:: selfcord.ext.commands.MemberConverter
     :members:
 
-.. autoclass:: discord.ext.commands.UserConverter
+.. autoclass:: selfcord.ext.commands.UserConverter
     :members:
 
-.. autoclass:: discord.ext.commands.MessageConverter
+.. autoclass:: selfcord.ext.commands.MessageConverter
     :members:
 
-.. autoclass:: discord.ext.commands.PartialMessageConverter
+.. autoclass:: selfcord.ext.commands.PartialMessageConverter
     :members:
 
-.. autoclass:: discord.ext.commands.GuildChannelConverter
+.. autoclass:: selfcord.ext.commands.GuildChannelConverter
     :members:
 
-.. autoclass:: discord.ext.commands.TextChannelConverter
+.. autoclass:: selfcord.ext.commands.TextChannelConverter
     :members:
 
-.. autoclass:: discord.ext.commands.VoiceChannelConverter
+.. autoclass:: selfcord.ext.commands.VoiceChannelConverter
     :members:
 
-.. autoclass:: discord.ext.commands.StageChannelConverter
+.. autoclass:: selfcord.ext.commands.StageChannelConverter
     :members:
 
-.. autoclass:: discord.ext.commands.CategoryChannelConverter
+.. autoclass:: selfcord.ext.commands.CategoryChannelConverter
     :members:
 
-.. autoclass:: discord.ext.commands.InviteConverter
+.. autoclass:: selfcord.ext.commands.InviteConverter
     :members:
 
-.. autoclass:: discord.ext.commands.GuildConverter
+.. autoclass:: selfcord.ext.commands.GuildConverter
     :members:
 
-.. autoclass:: discord.ext.commands.RoleConverter
+.. autoclass:: selfcord.ext.commands.RoleConverter
     :members:
 
-.. autoclass:: discord.ext.commands.GameConverter
+.. autoclass:: selfcord.ext.commands.GameConverter
     :members:
 
-.. autoclass:: discord.ext.commands.ColourConverter
+.. autoclass:: selfcord.ext.commands.ColourConverter
     :members:
 
-.. autoclass:: discord.ext.commands.EmojiConverter
+.. autoclass:: selfcord.ext.commands.EmojiConverter
     :members:
 
-.. autoclass:: discord.ext.commands.PartialEmojiConverter
+.. autoclass:: selfcord.ext.commands.PartialEmojiConverter
     :members:
 
-.. autoclass:: discord.ext.commands.ThreadConverter
+.. autoclass:: selfcord.ext.commands.ThreadConverter
     :members:
 
-.. autoclass:: discord.ext.commands.GuildStickerConverter
+.. autoclass:: selfcord.ext.commands.GuildStickerConverter
     :members:
 
-.. autoclass:: discord.ext.commands.ScheduledEventConverter
+.. autoclass:: selfcord.ext.commands.ScheduledEventConverter
     :members:
 
-.. autoclass:: discord.ext.commands.clean_content
+.. autoclass:: selfcord.ext.commands.clean_content
     :members:
 
-.. autoclass:: discord.ext.commands.Greedy()
+.. autoclass:: selfcord.ext.commands.Greedy()
 
-.. autofunction:: discord.ext.commands.run_converters
+.. autofunction:: selfcord.ext.commands.run_converters
 
 Flag Converter
 ~~~~~~~~~~~~~~~
 
-.. autoclass:: discord.ext.commands.FlagConverter
+.. autoclass:: selfcord.ext.commands.FlagConverter
     :members:
 
-.. autoclass:: discord.ext.commands.Flag()
+.. autoclass:: selfcord.ext.commands.Flag()
     :members:
 
-.. autofunction:: discord.ext.commands.flag
+.. autofunction:: selfcord.ext.commands.flag
 
 
 Defaults
 --------
 
-.. autoclass:: discord.ext.commands.Parameter()
+.. autoclass:: selfcord.ext.commands.Parameter()
     :members:
 
-.. autofunction:: discord.ext.commands.parameter
+.. autofunction:: selfcord.ext.commands.parameter
 
-.. autofunction:: discord.ext.commands.param
+.. autofunction:: selfcord.ext.commands.param
 
-.. data:: discord.ext.commands.Author
+.. data:: selfcord.ext.commands.Author
 
     A default :class:`.Parameter` which returns the :attr:`~.Context.author` for this context.
 
     .. versionadded:: 2.0
 
-.. data:: discord.ext.commands.CurrentChannel
+.. data:: selfcord.ext.commands.CurrentChannel
 
     A default :class:`.Parameter` which returns the :attr:`~.Context.channel` for this context.
 
     .. versionadded:: 2.0
 
-.. data:: discord.ext.commands.CurrentGuild
+.. data:: selfcord.ext.commands.CurrentGuild
 
-    A default :class:`.Parameter` which returns the :attr:`~.Context.guild` for this context. This will never be ``None``. If the command is called in a DM context then :exc:`~discord.ext.commands.NoPrivateMessage` is raised to the error handlers.
+    A default :class:`.Parameter` which returns the :attr:`~.Context.guild` for this context. This will never be ``None``. If the command is called in a DM context then :exc:`~selfcord.ext.commands.NoPrivateMessage` is raised to the error handlers.
 
     .. versionadded:: 2.0
 
@@ -463,172 +463,172 @@ Defaults
 Exceptions
 -----------
 
-.. autoexception:: discord.ext.commands.CommandError
+.. autoexception:: selfcord.ext.commands.CommandError
     :members:
 
-.. autoexception:: discord.ext.commands.ConversionError
+.. autoexception:: selfcord.ext.commands.ConversionError
     :members:
 
-.. autoexception:: discord.ext.commands.MissingRequiredArgument
+.. autoexception:: selfcord.ext.commands.MissingRequiredArgument
     :members:
 
-.. autoexception:: discord.ext.commands.ArgumentParsingError
+.. autoexception:: selfcord.ext.commands.ArgumentParsingError
     :members:
 
-.. autoexception:: discord.ext.commands.UnexpectedQuoteError
+.. autoexception:: selfcord.ext.commands.UnexpectedQuoteError
     :members:
 
-.. autoexception:: discord.ext.commands.InvalidEndOfQuotedStringError
+.. autoexception:: selfcord.ext.commands.InvalidEndOfQuotedStringError
     :members:
 
-.. autoexception:: discord.ext.commands.ExpectedClosingQuoteError
+.. autoexception:: selfcord.ext.commands.ExpectedClosingQuoteError
     :members:
 
-.. autoexception:: discord.ext.commands.BadArgument
+.. autoexception:: selfcord.ext.commands.BadArgument
     :members:
 
-.. autoexception:: discord.ext.commands.BadUnionArgument
+.. autoexception:: selfcord.ext.commands.BadUnionArgument
     :members:
 
-.. autoexception:: discord.ext.commands.BadLiteralArgument
+.. autoexception:: selfcord.ext.commands.BadLiteralArgument
     :members:
 
-.. autoexception:: discord.ext.commands.PrivateMessageOnly
+.. autoexception:: selfcord.ext.commands.PrivateMessageOnly
     :members:
 
-.. autoexception:: discord.ext.commands.NoPrivateMessage
+.. autoexception:: selfcord.ext.commands.NoPrivateMessage
     :members:
 
-.. autoexception:: discord.ext.commands.CheckFailure
+.. autoexception:: selfcord.ext.commands.CheckFailure
     :members:
 
-.. autoexception:: discord.ext.commands.CheckAnyFailure
+.. autoexception:: selfcord.ext.commands.CheckAnyFailure
     :members:
 
-.. autoexception:: discord.ext.commands.CommandNotFound
+.. autoexception:: selfcord.ext.commands.CommandNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.DisabledCommand
+.. autoexception:: selfcord.ext.commands.DisabledCommand
     :members:
 
-.. autoexception:: discord.ext.commands.CommandInvokeError
+.. autoexception:: selfcord.ext.commands.CommandInvokeError
     :members:
 
-.. autoexception:: discord.ext.commands.TooManyArguments
+.. autoexception:: selfcord.ext.commands.TooManyArguments
     :members:
 
-.. autoexception:: discord.ext.commands.UserInputError
+.. autoexception:: selfcord.ext.commands.UserInputError
     :members:
 
-.. autoexception:: discord.ext.commands.CommandOnCooldown
+.. autoexception:: selfcord.ext.commands.CommandOnCooldown
     :members:
 
-.. autoexception:: discord.ext.commands.MaxConcurrencyReached
+.. autoexception:: selfcord.ext.commands.MaxConcurrencyReached
     :members:
 
-.. autoexception:: discord.ext.commands.NotOwner
+.. autoexception:: selfcord.ext.commands.NotOwner
     :members:
 
-.. autoexception:: discord.ext.commands.MessageNotFound
+.. autoexception:: selfcord.ext.commands.MessageNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.MemberNotFound
+.. autoexception:: selfcord.ext.commands.MemberNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.GuildNotFound
+.. autoexception:: selfcord.ext.commands.GuildNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.UserNotFound
+.. autoexception:: selfcord.ext.commands.UserNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.ChannelNotFound
+.. autoexception:: selfcord.ext.commands.ChannelNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.ChannelNotReadable
+.. autoexception:: selfcord.ext.commands.ChannelNotReadable
     :members:
 
-.. autoexception:: discord.ext.commands.ThreadNotFound
+.. autoexception:: selfcord.ext.commands.ThreadNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.BadColourArgument
+.. autoexception:: selfcord.ext.commands.BadColourArgument
     :members:
 
-.. autoexception:: discord.ext.commands.RoleNotFound
+.. autoexception:: selfcord.ext.commands.RoleNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.BadInviteArgument
+.. autoexception:: selfcord.ext.commands.BadInviteArgument
     :members:
 
-.. autoexception:: discord.ext.commands.EmojiNotFound
+.. autoexception:: selfcord.ext.commands.EmojiNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.PartialEmojiConversionFailure
+.. autoexception:: selfcord.ext.commands.PartialEmojiConversionFailure
     :members:
 
-.. autoexception:: discord.ext.commands.GuildStickerNotFound
+.. autoexception:: selfcord.ext.commands.GuildStickerNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.ScheduledEventNotFound
+.. autoexception:: selfcord.ext.commands.ScheduledEventNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.BadBoolArgument
+.. autoexception:: selfcord.ext.commands.BadBoolArgument
     :members:
 
-.. autoexception:: discord.ext.commands.MissingPermissions
+.. autoexception:: selfcord.ext.commands.MissingPermissions
     :members:
 
-.. autoexception:: discord.ext.commands.BotMissingPermissions
+.. autoexception:: selfcord.ext.commands.BotMissingPermissions
     :members:
 
-.. autoexception:: discord.ext.commands.MissingRole
+.. autoexception:: selfcord.ext.commands.MissingRole
     :members:
 
-.. autoexception:: discord.ext.commands.BotMissingRole
+.. autoexception:: selfcord.ext.commands.BotMissingRole
     :members:
 
-.. autoexception:: discord.ext.commands.MissingAnyRole
+.. autoexception:: selfcord.ext.commands.MissingAnyRole
     :members:
 
-.. autoexception:: discord.ext.commands.BotMissingAnyRole
+.. autoexception:: selfcord.ext.commands.BotMissingAnyRole
     :members:
 
-.. autoexception:: discord.ext.commands.NSFWChannelRequired
+.. autoexception:: selfcord.ext.commands.NSFWChannelRequired
     :members:
 
-.. autoexception:: discord.ext.commands.FlagError
+.. autoexception:: selfcord.ext.commands.FlagError
     :members:
 
-.. autoexception:: discord.ext.commands.BadFlagArgument
+.. autoexception:: selfcord.ext.commands.BadFlagArgument
     :members:
 
-.. autoexception:: discord.ext.commands.MissingFlagArgument
+.. autoexception:: selfcord.ext.commands.MissingFlagArgument
     :members:
 
-.. autoexception:: discord.ext.commands.TooManyFlags
+.. autoexception:: selfcord.ext.commands.TooManyFlags
     :members:
 
-.. autoexception:: discord.ext.commands.MissingRequiredFlag
+.. autoexception:: selfcord.ext.commands.MissingRequiredFlag
     :members:
 
-.. autoexception:: discord.ext.commands.ExtensionError
+.. autoexception:: selfcord.ext.commands.ExtensionError
     :members:
 
-.. autoexception:: discord.ext.commands.ExtensionAlreadyLoaded
+.. autoexception:: selfcord.ext.commands.ExtensionAlreadyLoaded
     :members:
 
-.. autoexception:: discord.ext.commands.ExtensionNotLoaded
+.. autoexception:: selfcord.ext.commands.ExtensionNotLoaded
     :members:
 
-.. autoexception:: discord.ext.commands.NoEntryPointError
+.. autoexception:: selfcord.ext.commands.NoEntryPointError
     :members:
 
-.. autoexception:: discord.ext.commands.ExtensionFailed
+.. autoexception:: selfcord.ext.commands.ExtensionFailed
     :members:
 
-.. autoexception:: discord.ext.commands.ExtensionNotFound
+.. autoexception:: selfcord.ext.commands.ExtensionNotFound
     :members:
 
-.. autoexception:: discord.ext.commands.CommandRegistrationError
+.. autoexception:: selfcord.ext.commands.CommandRegistrationError
     :members:
 
 

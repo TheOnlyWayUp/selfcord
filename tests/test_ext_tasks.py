@@ -2,7 +2,7 @@
 
 """
 
-Tests for discord.ext.tasks
+Tests for selfcord.ext.tasks
 
 """
 
@@ -12,8 +12,8 @@ import datetime
 import pytest
 import sys
 
-from discord import utils
-from discord.ext import tasks
+from selfcord import utils
+from selfcord.ext import tasks
 
 
 @pytest.mark.asyncio

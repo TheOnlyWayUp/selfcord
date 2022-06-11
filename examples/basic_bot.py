@@ -1,8 +1,8 @@
-import discord
-from discord.ext import commands
+import selfcord
+from selfcord.ext import commands
 import random
 
-description = '''An example bot to showcase the discord.ext.commands extension
+description = '''An example bot to showcase the selfcord.ext.commands extension
 module.
 
 There are a number of utility commands being showcased here.'''
@@ -49,7 +49,7 @@ async def repeat(ctx, times: int, content='repeating...'):
 
 
 @bot.command()
-async def joined(ctx, member: discord.Member):
+async def joined(ctx, member: selfcord.Member):
     """Says when a member joined."""
     await ctx.send(f'{member.name} joined in {member.joined_at}')
 

@@ -2,7 +2,7 @@
 
 """
 
-Tests for discord.utils
+Tests for selfcord.utils
 
 """
 
@@ -16,7 +16,7 @@ import typing
 
 import pytest
 
-from discord import utils
+from selfcord import utils
 
 
 # Async generator for async support
@@ -128,7 +128,7 @@ def test_valid_icon_size():
 @pytest.mark.parametrize(
     ('url', 'code'),
     [
-        ('https://discordapp.com/invite/dpy', 'dpy'),
+        ('https://selfcordapp.com/invite/dpy', 'dpy'),
         ('https://discord.com/invite/dpy', 'dpy'),
         ('https://discord.gg/dpy', 'dpy'),
     ],
@@ -140,10 +140,10 @@ def test_resolve_invite(url, code):
 @pytest.mark.parametrize(
     ('url', 'event_id'),
     [
-        ('https://discordapp.com/invite/dpy', None),
+        ('https://selfcordapp.com/invite/dpy', None),
         ('https://discord.com/invite/dpy', None),
         ('https://discord.gg/dpy', None),
-        ('https://discordapp.com/invite/dpy?event=22222222', 22222222),
+        ('https://selfcordapp.com/invite/dpy?event=22222222', 22222222),
         ('https://discord.com/invite/dpy?event=4098', 4098),
         ('https://discord.gg/dpy?event=727', 727),
     ],
@@ -155,9 +155,9 @@ def test_resolve_invite_event(url, event_id: typing.Optional[int]):
 @pytest.mark.parametrize(
     ('url', 'code'),
     [
-        ('https://discordapp.com/template/foobar', 'foobar'),
+        ('https://selfcordapp.com/template/foobar', 'foobar'),
         ('https://discord.com/template/foobar', 'foobar'),
-        ('https://discord.new/foobar', 'foobar'),
+        ('https://selfcord.new/foobar', 'foobar'),
     ],
 )
 def test_resolve_template(url, code):

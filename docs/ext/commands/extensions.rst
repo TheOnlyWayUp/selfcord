@@ -1,4 +1,4 @@
-.. currentmodule:: discord
+.. currentmodule:: selfcord
 
 .. _ext_commands_extensions:
 
@@ -18,7 +18,7 @@ An example extension looks like this:
     :caption: hello.py
     :emphasize-lines: 7,8
 
-    from discord.ext import commands
+    from selfcord.ext import commands
 
     @commands.command()
     async def hello(ctx):
