@@ -1417,7 +1417,7 @@ class Client:
 
         Parameters
         -----------
-        channel: Optional[:class:`~selfcord.abc.Snowflake`]
+        channel: Optional[:class:`~abc.Snowflake`]
             Channel the client wants to join (must be a private channel). Use ``None`` to disconnect.
         self_mute: :class:`bool`
             Indicates if the client should be self-muted.
@@ -1672,7 +1672,7 @@ class Client:
 
         Parameters
         -----------
-        guild: :class:`~selfcord.abc.Snowflake`
+        guild: :class:`~abc.Snowflake`
             The guild to leave.
         lurking: :class:`bool`
             Whether you are lurking the guild.
@@ -2292,7 +2292,7 @@ class Client:
 
         Parameters
         -----------
-        user: :class:`~selfcord.abc.Snowflake`
+        user: :class:`~abc.Snowflake`
             The user to create a DM with.
 
         Returns
@@ -2319,7 +2319,7 @@ class Client:
 
         Parameters
         -----------
-        \*recipients: :class:`~selfcord.abc.Snowflake`
+        \*recipients: :class:`~abc.Snowflake`
             An argument :class:`list` of :class:`selfcord.User` to have in
             your group.
 

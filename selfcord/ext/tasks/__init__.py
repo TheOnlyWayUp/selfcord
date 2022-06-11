@@ -46,8 +46,8 @@ import sys
 import traceback
 
 from collections.abc import Sequence
-from selfcord.backoff import ExponentialBackoff
-from selfcord.utils import MISSING
+from ...backoff import ExponentialBackoff
+from ...utils import MISSING
 
 _log = logging.getLogger(__name__)
 

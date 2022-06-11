@@ -44,8 +44,8 @@ from typing import (
     Mapping,
 )
 
-import selfcord.utils
-from selfcord.utils import MISSING
+from ... import utils
+from ...utils import MISSING
 
 from .core import Group, Command, get_signature_parameters
 from .errors import CommandError
@@ -53,7 +53,7 @@ from .errors import CommandError
 if TYPE_CHECKING:
     from typing_extensions import Self
 
-    import selfcord.abc
+    from . import abc
 
     from .bot import BotBase
     from .context import Context
@@ -673,11 +673,11 @@ class HelpCommand:
             The maximum width of the commands.
         """
 
-        as_lengths = (selfcord.utils._string_width(c.name) for c in commands)
+        as_lengths = (utils._string_width(c.name) for c in commands)
         return max(as_lengths, default=0)
 
-    def get_destination(self) -> selfcord.abc.MessageableChannel:
-        """Returns the :class:`~selfcord.abc.Messageable` where the help command will be output.
+    def get_destination(self) -> abc.MessageableChannel:
+        """Returns the :class:`~abc.Messageable` where the help command will be output.
 
         You can override this method to customise the behaviour.
 
@@ -946,7 +946,7 @@ class HelpCommand:
         if cog is not None:
             return await self.send_cog_help(cog)
 
-        maybe_coro = selfcord.utils.maybe_coroutine
+        maybe_coro = utils.maybe_coroutine
 
         # If it's not a cog then it's a command.
         # Since we want to have detailed errors when someone
@@ -1081,7 +1081,7 @@ class DefaultHelpCommand(HelpCommand):
         self.paginator.add_line(heading)
         max_size = max_size or self.get_max_size(commands)
 
-        get_width = selfcord.utils._string_width
+        get_width = utils._string_width
         for command in commands:
             name = command.name
             width = max_size - (get_width(name) - len(name))
@@ -1121,7 +1121,7 @@ class DefaultHelpCommand(HelpCommand):
                     self.paginator.add_line(line)
                 self.paginator.add_line()
 
-    def get_destination(self) -> selfcord.abc.Messageable:
+    def get_destination(self) -> abc.Messageable:
         ctx = self.context
         if self.dm_help is True:
             return ctx.author
@@ -1381,7 +1381,7 @@ class MinimalHelpCommand(HelpCommand):
                     self.paginator.add_line(line)
                 self.paginator.add_line()
 
-    def get_destination(self) -> selfcord.abc.Messageable:
+    def get_destination(self) -> abc.Messageable:
         ctx = self.context
         if self.dm_help is True:
             return ctx.author

@@ -2018,7 +2018,7 @@ class Message(PartialMessage, Hashable):
             This parameter is faked if ``application`` is specified.
         command_ids: Optional[List[:class:`int`]]
             List of up to 100 command IDs to search for. If the command doesn't exist, it won't be returned.
-        application: Optional[:class:`~selfcord.abc.Snowflake`]
+        application: Optional[:class:`~abc.Snowflake`]
             Return this application's commands. Always set to DM recipient in a private channel context.
         include_applications: :class:`bool`
             Whether to include applications in the response. This defaults to ``True`` if possible.

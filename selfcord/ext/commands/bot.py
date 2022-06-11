@@ -50,7 +50,7 @@ from typing import (
 )
 
 import selfcord
-from selfcord.utils import MISSING, _is_submodule
+from ...utils import MISSING, _is_submodule
 
 from .core import GroupMixin
 from .view import StringView
@@ -64,8 +64,8 @@ if TYPE_CHECKING:
 
     import importlib.machinery
 
-    from selfcord.message import Message
-    from selfcord.abc import User
+    from ...message import Message
+    from abc import User
     from ._types import (
         _Bot,
         BotT,

@@ -943,7 +943,7 @@ class SyncWebhook(BaseWebhook):
             Controls the mentions being processed in this message.
 
             .. versionadded:: 1.4
-        thread: :class:`~selfcord.abc.Snowflake`
+        thread: :class:`~abc.Snowflake`
             The thread to send this message to.
 
             .. versionadded:: 2.0
@@ -1024,7 +1024,7 @@ class SyncWebhook(BaseWebhook):
         ------------
         id: :class:`int`
             The message ID to look for.
-        thread: :class:`~selfcord.abc.Snowflake`
+        thread: :class:`~abc.Snowflake`
             The thread to look in.
 
         Raises
@@ -1098,7 +1098,7 @@ class SyncWebhook(BaseWebhook):
         allowed_mentions: :class:`AllowedMentions`
             Controls the mentions being processed in this message.
             See :meth:`.abc.Messageable.send` for more information.
-        thread: :class:`~selfcord.abc.Snowflake`
+        thread: :class:`~abc.Snowflake`
             The thread the webhook message belongs to.
 
             .. versionadded:: 2.0
@@ -1158,7 +1158,7 @@ class SyncWebhook(BaseWebhook):
         ------------
         message_id: :class:`int`
             The message ID to delete.
-        hread: :class:`~selfcord.abc.Snowflake`
+        hread: :class:`~abc.Snowflake`
             The thread the webhook message belongs to.
 
             .. versionadded:: 2.0

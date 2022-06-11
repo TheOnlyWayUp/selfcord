@@ -554,7 +554,7 @@ class Invite(Hashable):
 
         Parameters
         ----------
-        scheduled_event: :class:`~selfcord.abc.Snowflake`
+        scheduled_event: :class:`~abc.Snowflake`
             The ID of the scheduled event.
 
         Returns

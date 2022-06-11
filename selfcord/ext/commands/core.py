@@ -58,7 +58,7 @@ from .parameters import Parameter, Signature
 if TYPE_CHECKING:
     from typing_extensions import Concatenate, ParamSpec, Self, TypeGuard
 
-    from selfcord.message import Message
+    from ...message import Message
 
     from ._types import BotT, Check, ContextT, Coro, CoroFunc, Error, ErrorT, Hook, HookT
 

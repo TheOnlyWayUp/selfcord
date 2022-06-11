@@ -24,7 +24,7 @@ DEALINGS IN THE SOFTWARE.
 from __future__ import annotations
 
 import inspect
-from selfcord.utils import maybe_coroutine, MISSING
+from ...utils import maybe_coroutine, MISSING
 
 from typing import Any, Callable, Dict, Generator, List, Optional, TYPE_CHECKING, Tuple, TypeVar
 

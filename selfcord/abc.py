@@ -175,7 +175,7 @@ class User(Snowflake, Protocol):
     - :class:`~selfcord.ClientUser`
     - :class:`~selfcord.Member`
 
-    This ABC must also implement :class:`~selfcord.abc.Snowflake`.
+    This ABC must also implement :class:`~abc.Snowflake`.
 
     Attributes
     -----------
@@ -220,7 +220,7 @@ class PrivateChannel(Snowflake, Protocol):
     - :class:`~selfcord.DMChannel`
     - :class:`~selfcord.GroupChannel`
 
-    This ABC must also implement :class:`~selfcord.abc.Snowflake`.
+    This ABC must also implement :class:`~abc.Snowflake`.
 
     Attributes
     -----------
@@ -273,7 +273,7 @@ class GuildChannel:
     - :class:`~selfcord.CategoryChannel`
     - :class:`~selfcord.StageChannel`
 
-    This ABC must also implement :class:`~selfcord.abc.Snowflake`.
+    This ABC must also implement :class:`~abc.Snowflake`.
 
     Attributes
     -----------
@@ -504,7 +504,7 @@ class GuildChannel:
 
         Parameters
         -----------
-        obj: Union[:class:`~selfcord.Role`, :class:`~selfcord.abc.User`]
+        obj: Union[:class:`~selfcord.Role`, :class:`~abc.User`]
             The role or user denoting
             whose overwrite to get.
 
@@ -1020,10 +1020,10 @@ class GuildChannel:
             Whether to move the channel to the end of the
             channel list (or category if given).
             This is mutually exclusive with ``beginning``, ``before``, and ``after``.
-        before: :class:`~selfcord.abc.Snowflake`
+        before: :class:`~abc.Snowflake`
             The channel that should be before our current channel.
             This is mutually exclusive with ``beginning``, ``end``, and ``after``.
-        after: :class:`~selfcord.abc.Snowflake`
+        after: :class:`~abc.Snowflake`
             The channel that should be after our current channel.
             This is mutually exclusive with ``beginning``, ``end``, and ``before``.
         offset: :class:`int`
@@ -1033,7 +1033,7 @@ class GuildChannel:
             while a negative number moves it above. Note that this
             number is relative and computed after the ``beginning``,
             ``end``, ``before``, and ``after`` parameters.
-        category: Optional[:class:`~selfcord.abc.Snowflake`]
+        category: Optional[:class:`~abc.Snowflake`]
             The category to move this channel under.
             If ``None`` is given then it moves it out of the category.
             This parameter is ignored if moving a category channel.
@@ -1601,15 +1601,15 @@ class Messageable:
             The number of messages to retrieve.
             If ``None``, retrieves every message in the channel. Note, however,
             that this would make it a slow operation.
-        before: Optional[Union[:class:`~selfcord.abc.Snowflake`, :class:`datetime.datetime`]]
+        before: Optional[Union[:class:`~abc.Snowflake`, :class:`datetime.datetime`]]
             Retrieve messages before this date or message.
             If a datetime is provided, it is recommended to use a UTC aware datetime.
             If the datetime is naive, it is assumed to be local time.
-        after: Optional[Union[:class:`~selfcord.abc.Snowflake`, :class:`datetime.datetime`]]
+        after: Optional[Union[:class:`~abc.Snowflake`, :class:`datetime.datetime`]]
             Retrieve messages after this date or message.
             If a datetime is provided, it is recommended to use a UTC aware datetime.
             If the datetime is naive, it is assumed to be local time.
-        around: Optional[Union[:class:`~selfcord.abc.Snowflake`, :class:`datetime.datetime`]]
+        around: Optional[Union[:class:`~abc.Snowflake`, :class:`datetime.datetime`]]
             Retrieve messages around this date or message.
             If a datetime is provided, it is recommended to use a UTC aware datetime.
             If the datetime is naive, it is assumed to be local time.
@@ -1765,7 +1765,7 @@ class Messageable:
             This parameter is faked if ``application`` is specified.
         command_ids: Optional[List[:class:`int`]]
             List of up to 100 command IDs to search for. If the command doesn't exist, it won't be returned.
-        application: Optional[:class:`~selfcord.abc.Snowflake`]
+        application: Optional[:class:`~abc.Snowflake`]
             Return this application's commands. Always set to DM recipient in a private channel context.
         include_applications: :class:`bool`
             Whether to include applications in the response. This defaults to ``True`` if possible.
@@ -1892,7 +1892,7 @@ class Messageable:
             This parameter is faked if ``application`` is specified.
         command_ids: Optional[List[:class:`int`]]
             List of up to 100 command IDs to search for. If the command doesn't exist, it won't be returned.
-        application: Optional[:class:`~selfcord.abc.Snowflake`]
+        application: Optional[:class:`~abc.Snowflake`]
             Return this application's commands. Always set to DM recipient in a private channel context.
         include_applications: :class:`bool`
             Whether to include applications in the response. This defaults to ``True`` if possible.

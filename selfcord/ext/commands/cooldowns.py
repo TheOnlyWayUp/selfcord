@@ -26,7 +26,7 @@ from __future__ import annotations
 
 
 from typing import Any, Callable, Deque, Dict, Optional, TYPE_CHECKING
-from selfcord.enums import Enum
+from ...enums import Enum
 import time
 import asyncio
 from collections import deque

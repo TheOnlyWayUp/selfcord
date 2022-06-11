@@ -26,23 +26,23 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING, Any, AsyncIterator, Dict, Generic, List, Optional, TypeVar, Union
 
-import selfcord.abc
-import selfcord.utils
-from selfcord.utils import MISSING
-from selfcord.message import Message
+from . import abc
+from ... import utils
+from ...utils import MISSING
+from ...message import Message
 
 from ._types import BotT
 
 if TYPE_CHECKING:
     from typing_extensions import ParamSpec
 
-    from selfcord.abc import MessageableChannel
-    from discord.commands import MessageCommand
-    from selfcord.guild import Guild
-    from selfcord.member import Member
-    from selfcord.state import ConnectionState
-    from selfcord.user import ClientUser, User
-    from selfcord.voice_client import VoiceProtocol
+    from abc import MessageableChannel
+    from ..commands import MessageCommand
+    from ...guild import Guild
+    from ...member import Member
+    from ...state import ConnectionState
+    from ...user import ClientUser, User
+    from ...voice_client import VoiceProtocol
 
     from .cog import Cog
     from .core import Command
@@ -65,14 +65,14 @@ else:
     P = TypeVar('P')
 
 
-class Context(selfcord.abc.Messageable, Generic[BotT]):
+class Context(abc.Messageable, Generic[BotT]):
     r"""Represents the context in which a command is being invoked under.
 
     This class contains a lot of meta data to help you understand more about
     the invocation context. This class is not created manually and is instead
     passed around to commands as the first parameter.
 
-    This class implements the :class:`~selfcord.abc.Messageable` ABC.
+    This class implements the :class:`~abc.Messageable` ABC.
 
     Attributes
     -----------
@@ -264,7 +264,7 @@ class Context(selfcord.abc.Messageable, Generic[BotT]):
         """:class:`bool`: Checks if the invocation context is valid to be invoked with."""
         return self.prefix is not None and self.command is not None
 
-    async def _get_channel(self) -> selfcord.abc.Messageable:
+    async def _get_channel(self) -> abc.Messageable:
         return self.channel
 
     @property
@@ -292,26 +292,26 @@ class Context(selfcord.abc.Messageable, Generic[BotT]):
             return None
         return self.command.cog
 
-    @selfcord.utils.cached_property
+    @utils.cached_property
     def guild(self) -> Optional[Guild]:
         """Optional[:class:`.Guild`]: Returns the guild associated with this context's command. None if not available."""
         return self.message.guild
 
-    @selfcord.utils.cached_property
+    @utils.cached_property
     def channel(self) -> MessageableChannel:
         """Union[:class:`.abc.Messageable`]: Returns the channel associated with this context's command.
         Shorthand for :attr:`.Message.channel`.
         """
         return self.message.channel
 
-    @selfcord.utils.cached_property
+    @utils.cached_property
     def author(self) -> Union[User, Member]:
         """Union[:class:`~selfcord.User`, :class:`.Member`]:
         Returns the author associated with this context's command. Shorthand for :attr:`.Message.author`
         """
         return self.message.author
 
-    @selfcord.utils.cached_property
+    @utils.cached_property
     def me(self) -> Union[Member, ClientUser]:
         """Union[:class:`.Member`, :class:`.ClientUser`]:
         Similar to :attr:`.Guild.me` except it may return the :class:`.ClientUser` in private message contexts.
@@ -407,7 +407,7 @@ class Context(selfcord.abc.Messageable, Generic[BotT]):
         except CommandError as e:
             await cmd.on_help_command_error(self, e)
 
-    @selfcord.utils.copy_doc(Message.reply)
+    @utils.copy_doc(Message.reply)
     async def reply(self, content: Optional[str] = None, **kwargs: Any) -> Message:
         return await self.message.reply(content, **kwargs)
 
@@ -417,7 +417,7 @@ class Context(selfcord.abc.Messageable, Generic[BotT]):
         *,
         limit: Optional[int] = None,
         command_ids: Optional[List[int]] = None,
-        application: Optional[selfcord.abc.Snowflake] = None,
+        application: Optional[abc.Snowflake] = None,
         include_applications: bool = True,
     ) -> AsyncIterator[MessageCommand]:
         async for command in self.message.message_commands(

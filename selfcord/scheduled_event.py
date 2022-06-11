@@ -316,7 +316,7 @@ class ScheduledEvent(Hashable):
             The name of the scheduled event.
         description: :class:`str`
             The description of the scheduled event.
-        channel: Optional[:class:`~selfcord.abc.Snowflake`]
+        channel: Optional[:class:`~abc.Snowflake`]
             The channel to put the scheduled event in.
 
             Required if the entity type is either :attr:`EntityType.voice` or

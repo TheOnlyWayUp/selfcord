@@ -48,8 +48,8 @@ import selfcord
 from .errors import *
 
 if TYPE_CHECKING:
-    from selfcord.state import Channel
-    from selfcord.threads import Thread
+    from ...state import Channel
+    from ...threads import Thread
 
     from .parameters import Parameter
     from ._types import BotT, _Bot
@@ -97,7 +97,7 @@ def _get_from_guilds(bot: _Bot, getter: str, argument: Any) -> Any:
 _utils_get = selfcord.utils.get
 T = TypeVar('T')
 T_co = TypeVar('T_co', covariant=True)
-CT = TypeVar('CT', bound=selfcord.abc.GuildChannel)
+CT = TypeVar('CT', bound=abc.GuildChannel)
 TT = TypeVar('TT', bound=selfcord.Thread)
 
 
@@ -374,7 +374,7 @@ class PartialMessageConverter(Converter[selfcord.PartialMessage]):
     async def convert(self, ctx: Context[BotT], argument: str) -> selfcord.PartialMessage:
         guild_id, message_id, channel_id = self._get_id_matches(ctx, argument)
         channel = self._resolve_channel(ctx, guild_id, channel_id)
-        if not channel or not isinstance(channel, selfcord.abc.Messageable):
+        if not channel or not isinstance(channel, abc.Messageable):
             raise ChannelNotFound(channel_id)  # type: ignore # channel_id won't be None here
         return selfcord.PartialMessage(channel=channel, id=message_id)
 
@@ -400,7 +400,7 @@ class MessageConverter(IDConverter[selfcord.Message]):
         if message:
             return message
         channel = PartialMessageConverter._resolve_channel(ctx, guild_id, channel_id)
-        if not channel or not isinstance(channel, selfcord.abc.Messageable):
+        if not channel or not isinstance(channel, abc.Messageable):
             raise ChannelNotFound(channel_id)
         try:
             return await channel.fetch_message(message_id)
@@ -410,8 +410,8 @@ class MessageConverter(IDConverter[selfcord.Message]):
             raise ChannelNotReadable(channel)  # type: ignore # type-checker thinks channel could be a DMChannel at this point
 
 
-class GuildChannelConverter(IDConverter[selfcord.abc.GuildChannel]):
-    """Converts to a :class:`~selfcord.abc.GuildChannel`.
+class GuildChannelConverter(IDConverter[abc.GuildChannel]):
+    """Converts to a :class:`~abc.GuildChannel`.
 
     All lookups are via the local guild. If in a DM context, then the lookup
     is done by the global cache.
@@ -425,8 +425,8 @@ class GuildChannelConverter(IDConverter[selfcord.abc.GuildChannel]):
     .. versionadded:: 2.0
     """
 
-    async def convert(self, ctx: Context[BotT], argument: str) -> selfcord.abc.GuildChannel:
-        return self._resolve_channel(ctx, argument, 'channels', selfcord.abc.GuildChannel)
+    async def convert(self, ctx: Context[BotT], argument: str) -> abc.GuildChannel:
+        return self._resolve_channel(ctx, argument, 'channels', abc.GuildChannel)
 
     @staticmethod
     def _resolve_channel(ctx: Context[BotT], argument: str, attribute: str, type: Type[CT]) -> CT:
@@ -1088,7 +1088,7 @@ CONVERTER_MAPPING: Dict[type, Any] = {
     selfcord.PartialEmoji: PartialEmojiConverter,
     selfcord.CategoryChannel: CategoryChannelConverter,
     selfcord.Thread: ThreadConverter,
-    selfcord.abc.GuildChannel: GuildChannelConverter,
+    abc.GuildChannel: GuildChannelConverter,
     selfcord.GuildSticker: GuildStickerConverter,
     selfcord.ScheduledEvent: ScheduledEventConverter,
 }

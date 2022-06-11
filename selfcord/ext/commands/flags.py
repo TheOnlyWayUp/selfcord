@@ -30,7 +30,7 @@ import sys
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any, Dict, Iterator, List, Literal, Optional, Pattern, Set, Tuple, Union
 
-from selfcord.utils import MISSING, maybe_coroutine, resolve_annotation
+from ...utils import MISSING, maybe_coroutine, resolve_annotation
 
 from .converter import run_converters
 from .errors import BadFlagArgument, CommandError, MissingFlagArgument, MissingRequiredFlag, TooManyFlags

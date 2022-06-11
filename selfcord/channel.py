@@ -24,6 +24,23 @@ DEALINGS IN THE SOFTWARE.
 
 from __future__ import annotations
 
+import datetime
+
+from . import abc
+
+from .scheduled_event import ScheduledEvent
+from .permissions import PermissionOverwrite, Permissions
+from .enums import ChannelType, PrivacyLevel, try_enum, VideoQualityMode
+from .calls import PrivateCall, GroupCall
+from .mixins import Hashable
+from . import utils
+from .utils import MISSING
+from .asset import Asset
+from .errors import ClientException
+from .stage_instance import StageInstance
+from .threads import Thread
+from .invite import Invite
+from .http import handle_message_parameters
 from typing import (
     Any,
     AsyncIterator,
@@ -39,22 +56,6 @@ from typing import (
     Union,
     overload,
 )
-import datetime
-
-import selfcord.abc
-from .scheduled_event import ScheduledEvent
-from .permissions import PermissionOverwrite, Permissions
-from .enums import ChannelType, PrivacyLevel, try_enum, VideoQualityMode
-from .calls import PrivateCall, GroupCall
-from .mixins import Hashable
-from . import utils
-from .utils import MISSING
-from .asset import Asset
-from .errors import ClientException
-from .stage_instance import StageInstance
-from .threads import Thread
-from .invite import Invite
-from .http import handle_message_parameters
 
 __all__ = (
     'TextChannel',
@@ -96,7 +97,7 @@ if TYPE_CHECKING:
     from .types.snowflake import SnowflakeList
 
 
-class TextChannel(selfcord.abc.Messageable, selfcord.abc.GuildChannel, Hashable):
+class TextChannel(abc.Messageable, abc.GuildChannel, Hashable):
     """Represents a Discord guild text channel.
 
     .. container:: operations
@@ -208,7 +209,7 @@ class TextChannel(selfcord.abc.Messageable, selfcord.abc.GuildChannel, Hashable)
     def _sorting_bucket(self) -> int:
         return ChannelType.text.value
 
-    @utils.copy_doc(selfcord.abc.GuildChannel.permissions_for)
+    @utils.copy_doc(abc.GuildChannel.permissions_for)
     def permissions_for(self, obj: Union[Member, Role], /) -> Permissions:
         base = super().permissions_for(obj)
 
@@ -357,7 +358,7 @@ class TextChannel(selfcord.abc.Messageable, selfcord.abc.GuildChannel, Hashable)
             # the payload will always be the proper channel payload
             return self.__class__(state=self._state, guild=self.guild, data=payload)  # type: ignore
 
-    @utils.copy_doc(selfcord.abc.GuildChannel.clone)
+    @utils.copy_doc(abc.GuildChannel.clone)
     async def clone(self, *, name: Optional[str] = None, reason: Optional[str] = None) -> TextChannel:
         return await self._clone_impl(
             {'topic': self.topic, 'nsfw': self.nsfw, 'rate_limit_per_user': self.slowmode_delay}, name=name, reason=reason
@@ -471,7 +472,7 @@ class TextChannel(selfcord.abc.Messageable, selfcord.abc.GuildChannel, Hashable)
         List[:class:`.Message`]
             The list of messages that were deleted.
         """
-        return await selfcord.abc._purge_helper(
+        return await abc._purge_helper(
             self,
             limit=limit,
             check=check,
@@ -822,7 +823,7 @@ class TextChannel(selfcord.abc.Messageable, selfcord.abc.GuildChannel, Hashable)
             before_timestamp = update_before(threads[-1])
 
 
-class VocalGuildChannel(selfcord.abc.Connectable, selfcord.abc.GuildChannel, Hashable):
+class VocalGuildChannel(abc.Connectable, abc.GuildChannel, Hashable):
     __slots__ = (
         'name',
         'id',
@@ -917,7 +918,7 @@ class VocalGuildChannel(selfcord.abc.Connectable, selfcord.abc.GuildChannel, Has
         """
         return [event for event in self.guild.scheduled_events if event.channel_id == self.id]
 
-    @utils.copy_doc(selfcord.abc.GuildChannel.permissions_for)
+    @utils.copy_doc(abc.GuildChannel.permissions_for)
     def permissions_for(self, obj: Union[Member, Role], /) -> Permissions:
         base = super().permissions_for(obj)
 
@@ -930,7 +931,7 @@ class VocalGuildChannel(selfcord.abc.Connectable, selfcord.abc.GuildChannel, Has
         return base
 
 
-class VoiceChannel(selfcord.abc.Messageable, VocalGuildChannel):
+class VoiceChannel(abc.Messageable, VocalGuildChannel):
     """Represents a Discord guild voice channel.
 
     .. container:: operations
@@ -1163,7 +1164,7 @@ class VoiceChannel(selfcord.abc.Messageable, VocalGuildChannel):
         List[:class:`.Message`]
             The list of messages that were deleted.
         """
-        return await selfcord.abc._purge_helper(
+        return await abc._purge_helper(
             self,
             limit=limit,
             check=check,
@@ -1239,7 +1240,7 @@ class VoiceChannel(selfcord.abc.Messageable, VocalGuildChannel):
         data = await self._state.http.create_webhook(self.id, name=str(name), avatar=avatar, reason=reason)
         return Webhook.from_state(data, state=self._state)
 
-    @utils.copy_doc(selfcord.abc.GuildChannel.clone)
+    @utils.copy_doc(abc.GuildChannel.clone)
     async def clone(self, *, name: Optional[str] = None, reason: Optional[str] = None) -> VoiceChannel:
         return await self._clone_impl({'bitrate': self.bitrate, 'user_limit': self.user_limit}, name=name, reason=reason)
 
@@ -1456,7 +1457,7 @@ class StageChannel(VocalGuildChannel):
         """:class:`ChannelType`: The channel's Discord type."""
         return ChannelType.stage_voice
 
-    @utils.copy_doc(selfcord.abc.GuildChannel.clone)
+    @utils.copy_doc(abc.GuildChannel.clone)
     async def clone(self, *, name: Optional[str] = None, reason: Optional[str] = None) -> StageChannel:
         return await self._clone_impl({}, name=name, reason=reason)
 
@@ -1627,7 +1628,7 @@ class StageChannel(VocalGuildChannel):
             return self.__class__(state=self._state, guild=self.guild, data=payload)  # type: ignore
 
 
-class CategoryChannel(selfcord.abc.GuildChannel, Hashable):
+class CategoryChannel(abc.GuildChannel, Hashable):
     """Represents a Discord channel category.
 
     These are useful to group channels to logical compartments.
@@ -1700,7 +1701,7 @@ class CategoryChannel(selfcord.abc.GuildChannel, Hashable):
         """:class:`bool`: Checks if the category is NSFW."""
         return self.nsfw
 
-    @utils.copy_doc(selfcord.abc.GuildChannel.clone)
+    @utils.copy_doc(abc.GuildChannel.clone)
     async def clone(self, *, name: Optional[str] = None, reason: Optional[str] = None) -> CategoryChannel:
         return await self._clone_impl({'nsfw': self.nsfw}, name=name, reason=reason)
 
@@ -1775,7 +1776,7 @@ class CategoryChannel(selfcord.abc.GuildChannel, Hashable):
             # the payload will always be the proper channel payload
             return self.__class__(state=self._state, guild=self.guild, data=payload)  # type: ignore
 
-    @utils.copy_doc(selfcord.abc.GuildChannel.move)
+    @utils.copy_doc(abc.GuildChannel.move)
     async def move(self, **kwargs: Any) -> None:
         kwargs.pop('category', None)
         await super().move(**kwargs)
@@ -1857,7 +1858,7 @@ class CategoryChannel(selfcord.abc.GuildChannel, Hashable):
         return await self.guild.create_stage_channel(name, category=self, **options)
 
 
-class ForumChannel(selfcord.abc.GuildChannel, Hashable):
+class ForumChannel(abc.GuildChannel, Hashable):
     """Represents a Discord guild forum channel.
 
     .. versionadded:: 2.0
@@ -1963,7 +1964,7 @@ class ForumChannel(selfcord.abc.GuildChannel, Hashable):
     def _sorting_bucket(self) -> int:
         return ChannelType.text.value
 
-    @utils.copy_doc(selfcord.abc.GuildChannel.permissions_for)
+    @utils.copy_doc(abc.GuildChannel.permissions_for)
     def permissions_for(self, obj: Union[Member, Role], /) -> Permissions:
         base = super().permissions_for(obj)
 
@@ -1981,7 +1982,7 @@ class ForumChannel(selfcord.abc.GuildChannel, Hashable):
         """:class:`bool`: Checks if the forum is NSFW."""
         return self.nsfw
 
-    @utils.copy_doc(selfcord.abc.GuildChannel.clone)
+    @utils.copy_doc(abc.GuildChannel.clone)
     async def clone(self, *, name: Optional[str] = None, reason: Optional[str] = None) -> ForumChannel:
         return await self._clone_impl(
             {'topic': self.topic, 'nsfw': self.nsfw, 'rate_limit_per_user': self.slowmode_delay}, name=name, reason=reason
@@ -2189,7 +2190,7 @@ class ForumChannel(selfcord.abc.GuildChannel, Hashable):
             return Thread(guild=self.guild, state=self._state, data=data)
 
 
-class DMChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable):
+class DMChannel(abc.Messageable, abc.Connectable, Hashable):
     """Represents a Discord direct message channel.
 
     .. container:: operations
@@ -2331,7 +2332,7 @@ class DMChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable):
 
         Parameters
         -----------
-        obj: :class:`~selfcord.abc.Snowflake`
+        obj: :class:`~abc.Snowflake`
             The user to check permissions for. This parameter is ignored
             but kept for compatibility with other ``permissions_for`` methods.
 
@@ -2394,7 +2395,7 @@ class DMChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable):
         *,
         timeout: float = 60.0,
         reconnect: bool = True,
-        cls: Callable[[Client, selfcord.abc.Connectable], ConnectReturn] = MISSING,
+        cls: Callable[[Client, abc.Connectable], ConnectReturn] = MISSING,
         ring: bool = True,
     ) -> ConnectReturn:
         """|coro|
@@ -2438,7 +2439,7 @@ class DMChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable):
         return await super().connect(timeout=timeout, reconnect=reconnect, cls=cls)
 
 
-class GroupChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable):
+class GroupChannel(abc.Messageable, abc.Connectable, Hashable):
     """Represents a Discord group channel.
 
     .. container:: operations
@@ -2602,7 +2603,7 @@ class GroupChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable)
 
         Parameters
         -----------
-        obj: :class:`~selfcord.abc.Snowflake`
+        obj: :class:`~abc.Snowflake`
             The user to check permissions for.
 
         Returns
@@ -2633,7 +2634,7 @@ class GroupChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable)
 
         Parameters
         -----------
-        \*recipients: :class:`~selfcord.abc.Snowflake`
+        \*recipients: :class:`~abc.Snowflake`
             An argument list of users to add to this group.
 
         Raises
@@ -2654,7 +2655,7 @@ class GroupChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable)
 
         Parameters
         -----------
-        \*recipients: :class:`~selfcord.abc.Snowflake`
+        \*recipients: :class:`~abc.Snowflake`
             An argument list of users to remove from this group.
 
         Raises
@@ -2690,7 +2691,7 @@ class GroupChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable)
         icon: Optional[:class:`bytes`]
             A :term:`py:bytes-like object` representing the new icon.
             Could be ``None`` to remove the icon.
-        owner: :class:`~selfcord.abc.Snowflake`
+        owner: :class:`~abc.Snowflake`
             The new owner of the group.
 
                 .. versionadded:: 2.0
@@ -2779,7 +2780,7 @@ class GroupChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable)
         *,
         timeout: float = 60.0,
         reconnect: bool = True,
-        cls: Callable[[Client, selfcord.abc.Connectable], ConnectReturn] = MISSING,
+        cls: Callable[[Client, abc.Connectable], ConnectReturn] = MISSING,
         ring: bool = True,
     ) -> ConnectReturn:
         await self._get_channel()
@@ -2789,7 +2790,7 @@ class GroupChannel(selfcord.abc.Messageable, selfcord.abc.Connectable, Hashable)
         return await super().connect(timeout=timeout, reconnect=reconnect, cls=cls)
 
 
-class PartialMessageable(selfcord.abc.Messageable, Hashable):
+class PartialMessageable(abc.Messageable, Hashable):
     """Represents a partial messageable to aid with working messageable channels when
     only a channel ID is present.
 

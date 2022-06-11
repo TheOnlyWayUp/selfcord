@@ -411,7 +411,7 @@ class PrivateCall:
 
         Parameters
         ------------
-        user: :class:`~selfcord.abc.Snowflake`
+        user: :class:`~abc.Snowflake`
             The user to retrieve the voice state for.
 
         Returns
@@ -459,7 +459,7 @@ class GroupCall(PrivateCall):
 
         Parameters
         -----------
-        \*recipients: :class:`~selfcord.abc.Snowflake`
+        \*recipients: :class:`~abc.Snowflake`
             The recipients to ring. The default is to ring all recipients.
 
         Raises
@@ -479,7 +479,7 @@ class GroupCall(PrivateCall):
 
         Parameters
         -----------
-        \*recipients: :class:`~selfcord.abc.Snowflake`
+        \*recipients: :class:`~abc.Snowflake`
             The recipients to stop ringing.
 
         Raises

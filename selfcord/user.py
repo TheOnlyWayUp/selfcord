@@ -26,7 +26,7 @@ from __future__ import annotations
 
 from typing import Any, Callable, Dict, List, Optional, Tuple, TYPE_CHECKING, Union
 
-import selfcord.abc
+from . import abc
 from .asset import Asset
 from .colour import Colour
 from .enums import (
@@ -878,7 +878,7 @@ class ClientUser(BaseUser):
         return UserSettings(data=data, state=self._state)
 
 
-class User(BaseUser, selfcord.abc.Connectable, selfcord.abc.Messageable):
+class User(BaseUser, abc.Connectable, abc.Messageable):
     """Represents a Discord user.
 
     .. container:: operations
@@ -947,13 +947,13 @@ class User(BaseUser, selfcord.abc.Connectable, selfcord.abc.Messageable):
         """Optional[:class:`Relationship`]: Returns the :class:`Relationship` with this user if applicable, ``None`` otherwise."""
         return self._state.user.get_relationship(self.id)  # type: ignore # user is always present when logged in
 
-    @copy_doc(selfcord.abc.Connectable.connect)
+    @copy_doc(abc.Connectable.connect)
     async def connect(
         self,
         *,
         timeout: float = 60.0,
         reconnect: bool = True,
-        cls: Callable[[Client, selfcord.abc.Connectable], ConnectReturn] = MISSING,
+        cls: Callable[[Client, abc.Connectable], ConnectReturn] = MISSING,
         ring: bool = True,
     ) -> ConnectReturn:
         channel = await self._get_channel()

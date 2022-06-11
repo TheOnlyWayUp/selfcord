@@ -28,12 +28,12 @@ import inspect
 from operator import attrgetter
 from typing import TYPE_CHECKING, Any, Literal, Optional, OrderedDict, Union, Protocol
 
-from selfcord.utils import MISSING, maybe_coroutine
+from ...utils import MISSING, maybe_coroutine
 
 from .errors import NoPrivateMessage
 from .converter import GuildConverter
 
-from selfcord import (
+from ... import (
     Member,
     User,
     TextChannel,
@@ -45,7 +45,7 @@ from selfcord import (
 if TYPE_CHECKING:
     from typing_extensions import Self
 
-    from selfcord import Guild
+    from ... import Guild
 
     from .context import Context
 
